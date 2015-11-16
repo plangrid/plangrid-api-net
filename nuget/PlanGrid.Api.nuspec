@@ -1,0 +1,15 @@
+<package>
+  <metadata>
+    <id>PlanGrid.Api</id>
+    <version>0.0.1</version>
+    <authors>kirk</authors>
+    <owners>kirk</owners>
+    <projectUrl>https://github.com/plangrid/plangrid-api-net</projectUrl>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+	  <releaseNotes>Alpha Release.</releaseNotes>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>PlanGrid .NET SDK to connect to the public PlanGrid API</description>
+    <copyright>Copyright 2015 PlanGrid Inc.</copyright>
+    <tags>plangrid api</tags>
+  </metadata>
+</package>

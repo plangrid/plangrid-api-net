@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanGrid.Api.Tests", "PlanGrid.Api.Tests\PlanGrid.Api.Tests.csproj", "{A650AA19-DE09-4D8D-965A-7195D41FAE96}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PlanGrid.Api", "PlanGrid.Api\PlanGrid.Api.shproj", "{42B50126-061C-41DC-8544-B1698A30891E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanGrid.Api.Net45", "PlanGrid.Api.Net45\PlanGrid.Api.Net45.csproj", "{92301982-65EB-42E2-85F4-6691552292F0}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		PlanGrid.Api\PlanGrid.Api.projitems*{92301982-65eb-42e2-85f4-6691552292f0}*SharedItemsImports = 4
+		PlanGrid.Api\PlanGrid.Api.projitems*{42b50126-061c-41dc-8544-b1698a30891e}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A650AA19-DE09-4D8D-965A-7195D41FAE96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A650AA19-DE09-4D8D-965A-7195D41FAE96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A650AA19-DE09-4D8D-965A-7195D41FAE96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A650AA19-DE09-4D8D-965A-7195D41FAE96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92301982-65EB-42E2-85F4-6691552292F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92301982-65EB-42E2-85F4-6691552292F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92301982-65EB-42E2-85F4-6691552292F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92301982-65EB-42E2-85F4-6691552292F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

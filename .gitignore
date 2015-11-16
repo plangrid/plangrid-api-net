@@ -1,0 +1,7 @@
+.vs/
+packages/
+PlanGrid.Api.Tests/obj/
+PlanGrid.Api.Tests/bin/
+PlanGrid.Api.Net45/obj/
+*.user
+PlanGrid.Api.Net45/bin/
