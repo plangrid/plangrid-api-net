@@ -49,3 +49,7 @@ Some things to note:
 To get the next 20 projects (after the first 50), you would call:
 
     projects = await api.GetProjects(50, 20);
+
+## Copyright
+
+Copyright &copy; PlanGrid, Inc. MIT License; see LICENSE for further details.
