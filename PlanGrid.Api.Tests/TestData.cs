@@ -1,6 +1,7 @@
 ﻿// <copyright file="TestData.cs" company="PlanGrid, Inc.">
-//     Copyright (c) 2015 PlanGrid, Inc. All rights reserved.
+//     Copyright (c) 2016 PlanGrid, Inc. All rights reserved.
 // </copyright>
+
 namespace PlanGrid.Api.Tests
 {
     public static class TestData
@@ -11,6 +12,7 @@ namespace PlanGrid.Api.Tests
         public const string Project2Uid = "269ad633-0688-395e-5c30-cc685e0ce964";
         public const string Project2DraftRfiStatusUid = "00a8b880";
         public const string Project2OpenRfiStatusUid = "bcadf1c9";
+        public const string Project2PhotoUid = "6f976878-d243-c787-dfda-0290b7761968";
         public const string PhotoUrl = "https://photo-assets-test.plangrid.com/5a16f6d9-8006-ea7d-12ee-76c778b7094f.jpg";
         public const string ApiTestsUserEmail = "kirk+apitests@plangrid.com";
         public const string ApiTestsUserUid = "5644e9acf0cb79476f1d48ee";

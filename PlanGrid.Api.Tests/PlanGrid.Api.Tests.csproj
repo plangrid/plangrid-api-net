@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttachmentTests.cs" />
     <Compile Include="IssuesTests.cs" />
     <Compile Include="ProjectsTests.cs" />
     <Compile Include="RfisTests.cs" />
@@ -53,8 +54,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+    <EmbeddedResource Include="TestData\Sample.pdf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PlanGrid.Api.Net45\PlanGrid.Api.Net45.csproj">

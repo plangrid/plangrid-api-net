@@ -1,0 +1,74 @@
+﻿// <copyright file="AttachmentTests.cs" company="PlanGrid, Inc.">
+//     Copyright (c) 2016 PlanGrid, Inc. All rights reserved.
+// </copyright>
+
+using System;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using NUnit.Framework;
+
+namespace PlanGrid.Api.Tests
+{
+    [TestFixture]
+    public class AttachmentTests
+    {
+        [Test]
+        public async Task UploadAttachment()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            AttachmentUploadRequest request = await client.CreateAttachmentUploadRequest(TestData.Project2Uid, new AttachmentUpload
+            {
+                ContentType = AttachmentUpload.Pdf,
+                Name = "test name",
+                Folder = "test folder"
+            });
+
+            Stream payload = typeof(AttachmentTests).Assembly.GetManifestResourceStream("PlanGrid.Api.Tests.TestData.Sample.pdf");
+            Attachment attachment = await client.Upload(request, payload);
+
+            Assert.AreEqual("test name", attachment.Name);
+            Assert.AreEqual("test folder", attachment.Folder);
+            Assert.AreEqual(TestData.ApiTestsUserUid, attachment.CreatedBy.Uid);
+            Assert.AreNotEqual(attachment.CreatedAt, default(DateTime));
+            Assert.AreEqual(request.Uid, attachment.Uid);
+
+            using (var downloader = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip, AllowAutoRedirect = true }))
+            {
+                Stream returnedPayload = await downloader.GetStreamAsync(attachment.Url);
+                payload = typeof(AttachmentTests).Assembly.GetManifestResourceStream("PlanGrid.Api.Tests.TestData.Sample.pdf");
+                var payloadBytes = new MemoryStream();
+                await payload.CopyToAsync(payloadBytes);
+                var returnedBytes = new MemoryStream();
+                await returnedPayload.CopyToAsync(returnedBytes);
+                Assert.IsTrue(payloadBytes.ToArray().SequenceEqual(returnedBytes.ToArray()));
+            }
+        }
+
+        [Test]
+        public async Task UploadPdfAttachment()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            Stream payload = typeof(AttachmentTests).Assembly.GetManifestResourceStream("PlanGrid.Api.Tests.TestData.Sample.pdf");
+            Attachment attachment = await client.UploadPdfAttachment(TestData.Project2Uid, "test name", payload, "test folder");
+
+            Assert.AreEqual("test name", attachment.Name);
+            Assert.AreEqual("test folder", attachment.Folder);
+            Assert.AreEqual(TestData.ApiTestsUserUid, attachment.CreatedBy.Uid);
+            Assert.AreNotEqual(attachment.CreatedAt, default(DateTime));
+
+            using (var downloader = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip, AllowAutoRedirect = true }))
+            {
+                Stream returnedPayload = await downloader.GetStreamAsync(attachment.Url);
+                payload = typeof(AttachmentTests).Assembly.GetManifestResourceStream("PlanGrid.Api.Tests.TestData.Sample.pdf");
+                var payloadBytes = new MemoryStream();
+                await payload.CopyToAsync(payloadBytes);
+                var returnedBytes = new MemoryStream();
+                await returnedPayload.CopyToAsync(returnedBytes);
+                Assert.IsTrue(payloadBytes.ToArray().SequenceEqual(returnedBytes.ToArray()));
+            }
+        }
+    }
+}

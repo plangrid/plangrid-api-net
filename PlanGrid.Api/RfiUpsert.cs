@@ -1,6 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// <copyright file="RfisTests.cs" company="PlanGrid, Inc.">
+//     Copyright (c) 2016 PlanGrid, Inc. All rights reserved.
+// </copyright>
+
+using System;
 using Newtonsoft.Json;
 
 namespace PlanGrid.Api
@@ -11,7 +13,7 @@ namespace PlanGrid.Api
         public string StatusUid { get; set; }
 
         [JsonProperty("locked")]
-        public bool IsLocked { get; set; }
+        public bool? IsLocked { get; set; }
 
         [JsonProperty("title")]
         public string Title { get; set; }

@@ -1,5 +1,5 @@
 ﻿// <copyright file="IPlanGridApi.cs" company="PlanGrid, Inc.">
-//     Copyright (c) 2015 PlanGrid, Inc. All rights reserved.
+//     Copyright (c) 2016 PlanGrid, Inc. All rights reserved.
 // </copyright>
 
 using System;
@@ -69,5 +69,14 @@ namespace PlanGrid.Api
 
         [Patch("/projects/{projectUid}/rfis/{rfiUid}")]
         Task<Rfi> UpdateRfi(string projectUid, string rfiUid, [Body]RfiUpsert rfi);
+
+        [Post("/projects/{projectUid}/attachments/uploads")]
+        Task<AttachmentUploadRequest> CreateAttachmentUploadRequest(string projectUid, [Body]AttachmentUpload upload);
+
+        [Post("/projects/{projectUid}/rfis/{rfiUid}/attachments")]
+        Task ReferenceAttachmentFromRfi(string projectUid, string rfiUid, [Body]AttachmentReference attachmentReference);
+
+        [Post("/projects/{projectUid}/rfis/{rfiUid}/photos")]
+        Task ReferencePhotoFromRfi(string projectUid, string rfiUid, [Body]PhotoReference photoReference);
     }
 }

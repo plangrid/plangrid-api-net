@@ -1,8 +1,10 @@
 ﻿// <copyright file="RfisTests.cs" company="PlanGrid, Inc.">
-//     Copyright (c) 2015 PlanGrid, Inc. All rights reserved.
+//     Copyright (c) 2016 PlanGrid, Inc. All rights reserved.
 // </copyright>
 
 using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
@@ -23,10 +25,10 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual("Test Rfi Question", rfi.Question);
             Assert.AreEqual("Test Rfi", rfi.Title);
             Assert.AreEqual(1, rfi.Number);
-            Assert.AreEqual(DateTime.Parse("11/18/2015 11:30:21.000"), rfi.SentDate);
-            Assert.AreEqual(DateTime.Parse("11/19/2015 11:30:13.000"), rfi.DueDate);
-            Assert.AreEqual(DateTime.Parse("11/17/2015 12:06:47.912"), rfi.UpdatedAt);
-            Assert.AreEqual(DateTime.Parse("11/16/2015 13:48:26.641"), rfi.CreatedAt);
+            Assert.AreEqual(DateTime.Parse("11/18/2015 19:30:21.000"), rfi.SentDate);
+            Assert.AreEqual(DateTime.Parse("11/19/2015 19:30:13.000"), rfi.DueDate);
+            Assert.AreEqual(DateTime.Parse("11/17/2015 20:06:47.912"), rfi.UpdatedAt);
+            Assert.AreEqual(DateTime.Parse("11/16/2015 21:48:26.641"), rfi.CreatedAt);
             Assert.AreEqual("kirk+apitests@plangrid.com", rfi.AssignedTo[0].Email);
             Assert.AreEqual("kirk+apitests@plangrid.com", rfi.UpdatedBy.Email);
             Assert.AreEqual("kirk+apitests@plangrid.com", rfi.CreatedBy.Email);
@@ -186,6 +188,64 @@ namespace PlanGrid.Api.Tests
             Assert.AreNotEqual(rfi.CreatedAt, default(DateTime));
             Assert.AreEqual(TestData.ApiTestsUserUid, rfi.UpdatedBy.Uid);
             Assert.AreNotEqual(rfi.UpdatedAt, default(DateTime));
+        }
+
+        [Test]
+        public async Task ReferenceAttachment()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            var rfiInsert = new RfiUpsert
+            {
+                Question = "test question",
+                Answer = "test answer",
+                AssignedTo = new[] { TestData.ApiTestsUserUid },
+                DueDate = new DateTime(2020, 1, 1),
+                IsLocked = false,
+                SentDate = new DateTime(2019, 1, 1),
+                StatusUid = TestData.Project2DraftRfiStatusUid,
+                Title = "test title"
+            };
+            Rfi rfi = await client.CreateRfi(TestData.Project2Uid, rfiInsert);
+
+            AttachmentUploadRequest request = await client.CreateAttachmentUploadRequest(TestData.Project2Uid, new AttachmentUpload
+            {
+                ContentType = AttachmentUpload.Pdf,
+                Name = "test name",
+                Folder = "test folder"
+            });
+
+            Stream payload = typeof(AttachmentTests).Assembly.GetManifestResourceStream("PlanGrid.Api.Tests.TestData.Sample.pdf");
+            Attachment attachment = await client.Upload(request, payload);
+
+            await client.ReferenceAttachmentFromRfi(TestData.Project2Uid, rfi.Uid, new AttachmentReference { AttachmentUid = attachment.Uid });
+
+            Page<Attachment> attachments = await client.GetRfiAttachments(TestData.Project2Uid, rfi.Uid);
+            Attachment rfiAttachment = attachments.Data.Single();
+            Assert.AreEqual(attachment.Uid, rfiAttachment.Uid);
+        }
+
+        [Test]
+        public async Task ReferencePhoto()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            var rfiInsert = new RfiUpsert
+            {
+                Question = "test question",
+                Answer = "test answer",
+                AssignedTo = new[] { TestData.ApiTestsUserUid },
+                DueDate = new DateTime(2020, 1, 1),
+                IsLocked = false,
+                SentDate = new DateTime(2019, 1, 1),
+                StatusUid = TestData.Project2DraftRfiStatusUid,
+                Title = "test title"
+            };
+            Rfi rfi = await client.CreateRfi(TestData.Project2Uid, rfiInsert);
+
+            await client.ReferencePhotoFromRfi(TestData.Project2Uid, rfi.Uid, new PhotoReference { PhotoUid = TestData.Project2PhotoUid });
+
+            Page<Photo> photos = await client.GetRfiPhotos(TestData.Project2Uid, rfi.Uid);
+            Photo rfiPhoto = photos.Data.Single();
+            Assert.AreEqual(TestData.Project2PhotoUid, rfiPhoto.Uid);
         }
     }
 }

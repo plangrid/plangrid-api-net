@@ -6,15 +6,15 @@ using Newtonsoft.Json;
 
 namespace PlanGrid.Api
 {
-    public class RfiStatus
+    public class AttachmentUploadRequest
     {
+        [JsonProperty("webhook_url")]
+        public string WebhookUrl { get; set; }
+
         [JsonProperty("uid")]
         public string Uid { get; set; }
 
-        [JsonProperty("label")]
-        public string Label { get; set; }
-
-        [JsonProperty("color")]
-        public string Color { get; set; }
+        [JsonProperty("aws_post_form_arguments")]
+        public AwsPostFormArguments AwsPostFormArguments { get; set; }
     }
 }

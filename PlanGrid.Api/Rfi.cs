@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="RfisTests.cs" company="PlanGrid, Inc.">
+//     Copyright (c) 2016 PlanGrid, Inc. All rights reserved.
+// </copyright>
+
+using System;
 using Newtonsoft.Json;
 
 namespace PlanGrid.Api

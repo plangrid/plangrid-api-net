@@ -1,5 +1,5 @@
 ﻿// <copyright file="IssueAnnotation.cs" company="PlanGrid, Inc.">
-//     Copyright (c) 2015 PlanGrid, Inc. All rights reserved.
+//     Copyright (c) 2016 PlanGrid, Inc. All rights reserved.
 // </copyright>
 
 using Newtonsoft.Json;
