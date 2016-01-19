@@ -28,7 +28,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Project.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ProjectUpdate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rfi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RfiUpsert.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RfiStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RfiStatusUpdate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Role.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Snapshot.cs" />

@@ -28,6 +28,7 @@ namespace PlanGrid.Api
                 JsonSerializerSettings = new JsonSerializerSettings
                 {
                     DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                    DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                     Converters = new List<JsonConverter>(new[]
                     {
                         new StringEnumConverter()

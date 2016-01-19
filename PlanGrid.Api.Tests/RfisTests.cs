@@ -65,6 +65,20 @@ namespace PlanGrid.Api.Tests
         }
 
         [Test]
+        public async Task UpdateRfiStatuses()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            Page<RfiStatus> statuses = await client.GetRfiStatuses(TestData.Project1Uid);
+            Assert.AreEqual("draft", statuses.Data[0].Label);
+            await client.UpdateRfiStatus(TestData.Project1Uid, statuses.Data[0].Uid, new RfiStatusUpdate { Label = "draft2" });
+            statuses = await client.GetRfiStatuses(TestData.Project1Uid);
+            Assert.AreEqual("draft2", statuses.Data[0].Label);
+            await client.UpdateRfiStatus(TestData.Project1Uid, statuses.Data[0].Uid, new RfiStatusUpdate { Label = "draft" });
+            statuses = await client.GetRfiStatuses(TestData.Project1Uid);
+            Assert.AreEqual("draft", statuses.Data[0].Label);
+        }
+
+        [Test]
         public async Task GetRfiComments()
         {
             IPlanGridApi client = PlanGridClient.Create();
@@ -98,6 +112,80 @@ namespace PlanGrid.Api.Tests
             Page<Attachment> attachments = await client.GetRfiAttachments(TestData.Project1Uid, TestData.Project1Rfi1Uid);
             Assert.AreEqual(1, attachments.TotalCount);
             Assert.AreEqual("PA1.11.pdf", attachments.Data[0].Name);
+        }
+
+        [Test]
+        public async Task CreateRfi()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            var rfiInsert = new RfiUpsert
+            {
+                Question = "test question",
+                Answer = "test answer",
+                AssignedTo = new[] { TestData.ApiTestsUserUid },
+                DueDate = new DateTime(2020, 1, 1),
+                IsLocked = true,
+                SentDate = new DateTime(2019, 1, 1),
+                StatusUid = TestData.Project2DraftRfiStatusUid,
+                Title = "test title"
+            };
+            Rfi rfi = await client.CreateRfi(TestData.Project2Uid, rfiInsert);
+            Assert.AreEqual(rfiInsert.Question, rfi.Question);
+            Assert.AreEqual(rfiInsert.Answer, rfi.Answer);
+            Assert.AreEqual(rfiInsert.AssignedTo[0], rfi.AssignedTo[0].Uid);
+            Assert.AreEqual(rfiInsert.DueDate, rfi.DueDate);
+            Assert.AreEqual(rfiInsert.IsLocked, rfi.IsLocked);
+            Assert.AreEqual(rfiInsert.SentDate, rfi.SentDate);
+            Assert.AreEqual(rfiInsert.StatusUid, rfi.Status.Uid);
+            Assert.AreEqual(rfiInsert.Title, rfi.Title);
+            Assert.AreEqual(TestData.ApiTestsUserUid, rfi.CreatedBy.Uid);
+            Assert.AreNotEqual(rfi.CreatedAt, default(DateTime));
+            Assert.AreEqual(TestData.ApiTestsUserUid, rfi.UpdatedBy.Uid);
+            Assert.AreNotEqual(rfi.UpdatedAt, default(DateTime));
+        }
+
+        [Test]
+        public async Task UpdateRfi()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            var rfiInsert = new RfiUpsert
+            {
+                Question = "test question",
+                Answer = "test answer",
+                AssignedTo = new[] { TestData.ApiTestsUserUid },
+                DueDate = new DateTime(2020, 1, 1),
+                IsLocked = true,
+                SentDate = new DateTime(2019, 1, 1),
+                StatusUid = TestData.Project2DraftRfiStatusUid,
+                Title = "test title"
+            };
+            Rfi rfi = await client.CreateRfi(TestData.Project2Uid, rfiInsert);
+
+            var rfiUpdate = new RfiUpsert
+            {
+                Question = "test question2",
+                Answer = "test answer2",
+                AssignedTo = new[] { TestData.ApiTestsUser2Uid },
+                DueDate = new DateTime(2020, 1, 2),
+                IsLocked = false,
+                SentDate = new DateTime(2019, 1, 2),
+                StatusUid = TestData.Project2OpenRfiStatusUid,
+                Title = "test title2"
+            };
+            rfi = await client.UpdateRfi(TestData.Project2Uid, rfi.Uid, rfiUpdate);
+
+            Assert.AreEqual(rfiUpdate.Question, rfi.Question);
+            Assert.AreEqual(rfiUpdate.Answer, rfi.Answer);
+            Assert.AreEqual(rfiUpdate.AssignedTo[0], rfi.AssignedTo[0].Uid);
+            Assert.AreEqual(rfiUpdate.DueDate, rfi.DueDate);
+            Assert.AreEqual(rfiUpdate.IsLocked, rfi.IsLocked);
+            Assert.AreEqual(rfiUpdate.SentDate, rfi.SentDate);
+            Assert.AreEqual(rfiUpdate.StatusUid, rfi.Status.Uid);
+            Assert.AreEqual(rfiUpdate.Title, rfi.Title);
+            Assert.AreEqual(TestData.ApiTestsUserUid, rfi.CreatedBy.Uid);
+            Assert.AreNotEqual(rfi.CreatedAt, default(DateTime));
+            Assert.AreEqual(TestData.ApiTestsUserUid, rfi.UpdatedBy.Uid);
+            Assert.AreNotEqual(rfi.UpdatedAt, default(DateTime));
         }
     }
 }

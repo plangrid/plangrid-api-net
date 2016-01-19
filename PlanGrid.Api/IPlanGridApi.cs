@@ -60,5 +60,14 @@ namespace PlanGrid.Api
 
         [Get("/projects/{projectUid}/rfis/{rfiUid}/snapshots")]
         Task<Page<Snapshot>> GetRfiSnapshots(string projectUid, string rfiUid, int skip = Page.Skip, int limit = Page.Limit);
+
+        [Patch("/projects/{projectUid}/rfis/statuses/{statusUid}")]
+        Task<RfiStatus> UpdateRfiStatus(string projectUid, string statusUid, [Body]RfiStatusUpdate statusUpdate);
+
+        [Post("/projects/{projectUid}/rfis")]
+        Task<Rfi> CreateRfi(string projectUid, [Body]RfiUpsert rfi);
+
+        [Patch("/projects/{projectUid}/rfis/{rfiUid}")]
+        Task<Rfi> UpdateRfi(string projectUid, string rfiUid, [Body]RfiUpsert rfi);
     }
 }
