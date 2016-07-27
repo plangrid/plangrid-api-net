@@ -25,10 +25,10 @@ namespace PlanGrid.Api
         public string Answer { get; set; }
 
         [JsonProperty("sent_date")]
-        public DateTime? SentDate { get; set; }
+        public Date? SentDate { get; set; }
 
         [JsonProperty("due_date")]
-        public DateTime? DueDate { get; set; }
+        public Date? DueDate { get; set; }
 
         [JsonProperty("assigned_to")]
         public string[] AssignedTo { get; set; }

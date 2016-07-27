@@ -21,12 +21,18 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual(1, rfis.TotalCount);
 
             Rfi rfi = rfis.Data[0];
+
+            Page<RfiChange> history = await client.GetRfiHistory(TestData.Project1Uid, rfi.Uid);
+            Assert.AreEqual("locked", history.Data[0].Field);
+            Assert.AreEqual(true, (bool)history.Data[0].NewValue);
+            Assert.AreEqual(false, (bool)history.Data[0].OldValue);
+
             Assert.AreEqual("Test Rfi Answer", rfi.Answer);
             Assert.AreEqual("Test Rfi Question", rfi.Question);
             Assert.AreEqual("Test Rfi", rfi.Title);
             Assert.AreEqual(1, rfi.Number);
-            Assert.AreEqual(DateTime.Parse("11/18/2015 19:30:21.000"), rfi.SentDate);
-            Assert.AreEqual(DateTime.Parse("11/19/2015 19:30:13.000"), rfi.DueDate);
+            Assert.AreEqual(Date.Parse("2015-11-18"), rfi.SentDate);
+            Assert.AreEqual(Date.Parse("2015-11-19"), rfi.DueDate);
             Assert.AreEqual(DateTime.Parse("11/17/2015 20:06:47.912"), rfi.UpdatedAt);
             Assert.AreEqual(DateTime.Parse("11/16/2015 21:48:26.641"), rfi.CreatedAt);
             Assert.AreEqual("kirk+apitests@plangrid.com", rfi.AssignedTo[0].Email);
@@ -207,7 +213,7 @@ namespace PlanGrid.Api.Tests
             };
             Rfi rfi = await client.CreateRfi(TestData.Project2Uid, rfiInsert);
 
-            AttachmentUploadRequest request = await client.CreateAttachmentUploadRequest(TestData.Project2Uid, new AttachmentUpload
+            FileUpload request = await client.CreateAttachmentUploadRequest(TestData.Project2Uid, new AttachmentUpload
             {
                 ContentType = AttachmentUpload.Pdf,
                 Name = "test name",
@@ -215,7 +221,7 @@ namespace PlanGrid.Api.Tests
             });
 
             Stream payload = typeof(AttachmentTests).Assembly.GetManifestResourceStream("PlanGrid.Api.Tests.TestData.Sample.pdf");
-            Attachment attachment = await client.Upload(request, payload);
+            Attachment attachment = await client.Upload<Attachment>(request, payload);
 
             await client.ReferenceAttachmentFromRfi(TestData.Project2Uid, rfi.Uid, new AttachmentReference { AttachmentUid = attachment.Uid });
 

@@ -34,10 +34,10 @@ namespace PlanGrid.Api
         public UserReference[] AssignedTo { get; set; }
 
         [JsonProperty("sent_date")]
-        public DateTime? SentDate { get; set; }
+        public Date? SentDate { get; set; }
 
         [JsonProperty("due_date")]
-        public DateTime? DueDate { get; set; }
+        public Date? DueDate { get; set; }
 
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
