@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AttachmentUpload.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileUploadRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileUploadRequestStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JsonConverters\DateUrlParameterFormatter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PhotoUpdate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RfiChange.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileUpload.cs" />

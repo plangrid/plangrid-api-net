@@ -26,6 +26,7 @@ namespace PlanGrid.Api
             string url = baseUrl;
             var settings = new RefitSettings
             {
+                UrlParameterFormatter = new DateUrlParameterFormatter(),
                 JsonSerializerSettings = new JsonSerializerSettings
                 {
                     DateFormatHandling = DateFormatHandling.IsoDateFormat,

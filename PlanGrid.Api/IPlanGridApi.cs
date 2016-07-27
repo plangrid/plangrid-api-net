@@ -10,7 +10,7 @@ namespace PlanGrid.Api
 {
     public interface IPlanGridApi : IDisposable
     {
-        [Get("/projects?skip={skip}&limit={limit}")]
+        [Get("/projects")]
         Task<Page<Project>> GetProjects(int skip = Page.Skip, int limit = Page.Limit);
 
         [Get("/projects/{projectUid}")]
@@ -22,13 +22,13 @@ namespace PlanGrid.Api
         [Patch("/projects/{projectUid}")]
         Task<Project> UpdateProject(string projectUid, [Body]ProjectUpdate project);
 
-        [Get("/projects/{projectUid}/users?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/users")]
         Task<Page<User>> GetUsers(string projectUid, int skip = Page.Skip, int limit = Page.Limit);
 
         [Get("/projects/{projectUid}/users/{userUid}")]
         Task<User> GetUser(string projectUid, string userUid);
 
-        [Get("/projects/{projectUid}/roles?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/roles")]
         Task<Page<Role>> GetRoles(string projectUid, int skip = Page.Skip, int limit = Page.Limit);
 
         [Get("/projects/{projectUid}/roles/{roleUid}")]
@@ -40,34 +40,34 @@ namespace PlanGrid.Api
         [Delete("/projects/{projectUid}/users/{userUid}")]
         Task RemoveUser(string projectUid, string userUid);
 
-        [Get("/projects/{projectUid}/issues?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/issues")]
         Task<Page<Issue>> GetIssues(string projectUid, int skip = Page.Skip, int limit = Page.Limit);
 
-        [Get("/projects/{projectUid}/issues/{issueUid}/comments?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/issues/{issueUid}/comments")]
         Task<Page<Comment>> GetIssueComments(string projectUid, string issueUid, int skip = Page.Skip, int limit = Page.Limit);
 
-        [Get("/projects/{projectUid}/issues/{issueUid}/photos?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/issues/{issueUid}/photos")]
         Task<Page<Photo>> GetIssuePhotos(string projectUid, string issueUid, int skip = Page.Skip, int limit = Page.Limit);
 
-        [Get("/projects/{projectUid}/rfis?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/rfis")]
         Task<Page<Rfi>> GetRfis(string projectUid, int skip = Page.Skip, int limit = Page.Limit);
 
         [Get("/projects/{projectUid}/rfis/{rfiUid}")]
         Task<Rfi> GetRfi(string projectUid, string rfiUid);
 
-        [Get("/projects/{projectUid}/rfis/statuses?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/rfis/statuses")]
         Task<Page<RfiStatus>> GetRfiStatuses(string projectUid, int skip = Page.Skip, int limit = Page.Limit);
 
-        [Get("/projects/{projectUid}/rfis/{rfiUid}/attachments?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/rfis/{rfiUid}/attachments")]
         Task<Page<Attachment>> GetRfiAttachments(string projectUid, string rfiUid, int skip = Page.Skip, int limit = Page.Limit);
 
-        [Get("/projects/{projectUid}/rfis/{rfiUid}/comments?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/rfis/{rfiUid}/comments")]
         Task<Page<Comment>> GetRfiComments(string projectUid, string rfiUid, int skip = Page.Skip, int limit = Page.Limit);
 
-        [Get("/projects/{projectUid}/rfis/{rfiUid}/photos?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/rfis/{rfiUid}/photos")]
         Task<Page<Photo>> GetRfiPhotos(string projectUid, string rfiUid, int skip = Page.Skip, int limit = Page.Limit);
 
-        [Get("/projects/{projectUid}/rfis/{rfiUid}/snapshots?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/rfis/{rfiUid}/snapshots")]
         Task<Page<Snapshot>> GetRfiSnapshots(string projectUid, string rfiUid, int skip = Page.Skip, int limit = Page.Limit);
 
         [Delete("/projects/{projectUid}/rfis/{rfiUid}/snapshots/{snapshotUid}")]
@@ -79,7 +79,7 @@ namespace PlanGrid.Api
         [Delete("/projects/{projectUid}/rfis/{rfiUid}/attachments/{attachmentUid}")]
         Task RemoveAttachmentFromRfi(string projectUid, string rfiUid, string attachmentUid);
 
-        [Get("/projects/{projectUid}/rfis/{rfiUid}/history?skip={skip}&limit={limit}")]
+        [Get("/projects/{projectUid}/rfis/{rfiUid}/history")]
         Task<Page<RfiChange>> GetRfiHistory(string projectUid, string rfiUid, int skip = Page.Skip, int limit = Page.Limit);
 
         [Patch("/projects/{projectUid}/rfis/statuses/{statusUid}")]
@@ -100,8 +100,8 @@ namespace PlanGrid.Api
         [Patch("/projects/{projectUid}/attachments/{attachmentUid}")]
         Task<Attachment> UpdateAttachment(string projectUid, string attachmentUid, [Body] AttachmentUpdate attachment);
 
-        [Get("/projects/{projectUid}/attachments?skip={skip}&limit={limit}&folder={folder}&updated_after={updatedAfter}")]
-        Task<Page<Attachment>> GetAttachments(string projectUid, int skip = Page.Skip, int limit = Page.Limit, string folder = null, DateTime? updatedAfter = null);
+        [Get("/projects/{projectUid}/attachments")]
+        Task<Page<Attachment>> GetAttachments(string projectUid, int skip = Page.Skip, int limit = Page.Limit, string folder = null, DateTime? updated_after = null);
 
         [Get("/projects/{projectUid}/attachments/{attachmentUid}")]
         Task<Attachment> GetAttachment(string projectUid, string attachmentUid);
@@ -124,14 +124,14 @@ namespace PlanGrid.Api
         [Patch("/projects/{projectUid}/photos/{photoUid}")]
         Task<Photo> UpdatePhoto(string projectUid, string photoUid, [Body]PhotoUpdate photo);
 
+        [Get("/projects/{projectUid}/sheets")]
+        Task<Page<Sheet>> GetSheets(string projectUid, int skip = Page.Skip, int limit = Page.Limit, DateTime? updated_after = null);
+
         [Get("/projects/{projectUid}/snapshots/{snapshotUid}")]
         Task<Snapshot> GetSnapshot(string projectUid, string snapshotUid);
 
         [Delete("/projects/{projectUid}/snapshots/{snapshotUid}")]
         Task RemoveSnapshot(string projectUid, string snapshotUid);
-
-        [Get("/projects/{projectUid}/sheets?skip={skip}&limit={limit}&updated_after={updatedAfter}")]
-        Task<Page<Sheet>> GetSheets(string projectUid, int skip = Page.Skip, int limit = Page.Limit, DateTime? updatedAfter = null);
 
         [Get("/projects/{projectUid}/sheets/{sheetUid}")]
         Task<Sheet> GetSheet(string projectUid, string sheetUid);

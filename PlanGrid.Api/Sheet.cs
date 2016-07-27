@@ -33,5 +33,10 @@ namespace PlanGrid.Api
 
         [JsonProperty("uploaded_file_name")]
         public string UploadedFileName { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name} ({PublishedAt} by {PublishedBy.Email})";
+        }
     }
 }
