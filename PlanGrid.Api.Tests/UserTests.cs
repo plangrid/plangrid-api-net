@@ -51,9 +51,9 @@ namespace PlanGrid.Api.Tests
             Assert.IsFalse(invitedUser.IsRemoved);
             Assert.AreEqual(TestData.AdminRoleId, invitedUser.Role.Uid);
 
-            User removedUser = await api.RemoveUser(TestData.Project1Uid, invitedUser.Uid);
-            Assert.IsTrue(removedUser.IsRemoved);
-            Assert.AreEqual(invitedUser.Uid, removedUser.Uid);
+            await api.RemoveUser(TestData.Project1Uid, invitedUser.Uid);
+            User user = await api.GetUser(TestData.Project1Uid, invitedUser.Uid);
+            Assert.IsTrue(user.IsRemoved);
         }
     }
 }

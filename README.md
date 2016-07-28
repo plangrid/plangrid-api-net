@@ -1,12 +1,19 @@
-#PlanGrid .NET SDK for the public PlanGrid API
+# PlanGrid .NET SDK for the public PlanGrid API
 
 To install, use the Nuget [package](https://www.nuget.org/packages/PlanGrid.Api/):
 
     Install-Package PlanGrid.Api
 	
-##Getting Started
+## Details API Docs
 
-Once installed, to access the api, simply use `PlanGridClient.Create()`.  
+For the fullblown documentation, head on over to [our developer site](https://developer.plangrid.com).
+There you can get a description of every endpoint at your disposal and also
+an explanation of basic concepts such as authentication and how to get an 
+API token.
+
+## Getting Started
+
+Once installed, to access the api, simply use `PlanGridClient.Create()`.
 However, you will need to provide your API key to gain access.  There are 
 three ways to provide the key.  The simplest is to pass it directly as an
 argument to `Create`:
@@ -32,7 +39,7 @@ create the client with the parameterless constructor:
 Finally, you may set the key in an environment variable; the variable name 
 must be `PLANGRIDAPIKEY`.
 
-##Getting a list of projects
+## Getting a list of projects
 
 Having provided the API key in one of the ways outlined above, you can now
 interact with the various endpoints available to you.  To start, we'll simply

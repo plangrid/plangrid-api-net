@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace PlanGrid.Api
 {
-    public class AttachmentUploadRequest
+    public class FileUpload
     {
         [JsonProperty("webhook_url")]
         public string WebhookUrl { get; set; }

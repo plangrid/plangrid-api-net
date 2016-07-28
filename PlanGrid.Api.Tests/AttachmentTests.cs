@@ -19,7 +19,7 @@ namespace PlanGrid.Api.Tests
         public async Task UploadAttachment()
         {
             IPlanGridApi client = PlanGridClient.Create();
-            AttachmentUploadRequest request = await client.CreateAttachmentUploadRequest(TestData.Project2Uid, new AttachmentUpload
+            FileUpload request = await client.CreateAttachmentUploadRequest(TestData.Project2Uid, new AttachmentUpload
             {
                 ContentType = AttachmentUpload.Pdf,
                 Name = "test name",
@@ -27,7 +27,7 @@ namespace PlanGrid.Api.Tests
             });
 
             Stream payload = typeof(AttachmentTests).Assembly.GetManifestResourceStream("PlanGrid.Api.Tests.TestData.Sample.pdf");
-            Attachment attachment = await client.Upload(request, payload);
+            Attachment attachment = await client.Upload<Attachment>(request, payload);
 
             Assert.AreEqual("test name", attachment.Name);
             Assert.AreEqual("test folder", attachment.Folder);
@@ -45,6 +45,12 @@ namespace PlanGrid.Api.Tests
                 await returnedPayload.CopyToAsync(returnedBytes);
                 Assert.IsTrue(payloadBytes.ToArray().SequenceEqual(returnedBytes.ToArray()));
             }
+
+            Attachment retrievedAttachment = await client.GetAttachment(TestData.Project2Uid, attachment.Uid);
+            Assert.IsFalse(retrievedAttachment.IsDeleted);
+            await client.RemoveAttachment(TestData.Project2Uid, attachment.Uid);
+            Attachment removedAttachment = await client.GetAttachment(TestData.Project2Uid, attachment.Uid);
+            Assert.IsTrue(removedAttachment.IsDeleted);
         }
 
         [Test]
@@ -69,6 +75,17 @@ namespace PlanGrid.Api.Tests
                 await returnedPayload.CopyToAsync(returnedBytes);
                 Assert.IsTrue(payloadBytes.ToArray().SequenceEqual(returnedBytes.ToArray()));
             }
+
+            Attachment retrievedAttachment = await client.GetAttachment(TestData.Project2Uid, attachment.Uid);
+            Assert.IsFalse(retrievedAttachment.IsDeleted);
+            await client.UpdateAttachment(TestData.Project2Uid, attachment.Uid, new AttachmentUpdate { Name = "new name", Folder = "new folder" });
+            retrievedAttachment = await client.GetAttachment(TestData.Project2Uid, attachment.Uid);
+            Assert.AreEqual("new name", retrievedAttachment.Name);
+            Assert.AreEqual("new folder", retrievedAttachment.Folder);
+
+            await client.RemoveAttachment(TestData.Project2Uid, attachment.Uid);
+            Attachment removedAttachment = await client.GetAttachment(TestData.Project2Uid, attachment.Uid);
+            Assert.IsTrue(removedAttachment.IsDeleted);
         }
     }
 }

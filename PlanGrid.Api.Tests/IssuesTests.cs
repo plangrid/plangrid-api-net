@@ -36,14 +36,16 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual("AC", issue.CurrentAnnotation.Stamp);
             Assert.IsFalse(string.IsNullOrEmpty(issue.CurrentAnnotation.Uid));
             Assert.AreEqual(AnnotationVisibility.Master, issue.CurrentAnnotation.Visibility);
-            Assert.AreEqual("AR.1", issue.CurrentAnnotation.Sheet.Name);
-            Assert.IsFalse(issue.CurrentAnnotation.Sheet.IsDeleted);
-            Assert.IsFalse(string.IsNullOrEmpty(issue.CurrentAnnotation.Sheet.Uid));
-            Assert.AreEqual("Initial Set", issue.CurrentAnnotation.Sheet.VersionName);
+
+            Sheet sheet = await client.Resolve(issue.CurrentAnnotation.Sheet);
+            Assert.AreEqual("AR.1", sheet.Name);
+            Assert.IsFalse(sheet.IsDeleted);
+            Assert.IsFalse(string.IsNullOrEmpty(sheet.Uid));
+            Assert.AreEqual("Initial Set", sheet.VersionName);
 
             Page<Photo> photos = await client.Resolve(issue.Photos);
             Assert.AreEqual(1, photos.TotalCount);
-            Assert.AreEqual(1, issue.Photos.TotalCount);        
+            Assert.AreEqual(1, issue.Photos.TotalCount);
             Assert.AreEqual(DateTime.Parse("11/16/2015 18:32:43"), photos.Data[0].CreatedAt);
             Assert.AreEqual(TestData.ApiTestsUserEmail, photos.Data[0].CreatedBy.Email);
             Assert.AreEqual("Galaxy", photos.Data[0].Title);
@@ -83,7 +85,7 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual("Galaxy", photos.Data[0].Title);
             Assert.AreEqual(TestData.PhotoUrl, photos.Data[0].Url);
             Assert.IsFalse(string.IsNullOrEmpty(photos.Data[0].Uid));
-            Assert.IsFalse(photos.Data[0].IsDeleted);            
+            Assert.IsFalse(photos.Data[0].IsDeleted);
         }
     }
 }

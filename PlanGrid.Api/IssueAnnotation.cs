@@ -24,6 +24,6 @@ namespace PlanGrid.Api
         public bool IsDeleted { get; set; }
 
         [JsonProperty("sheet")]
-        public IssueAnnotationSheet Sheet { get; set; }
+        public RecordReference<Sheet> Sheet { get; set; }
     }
 }
