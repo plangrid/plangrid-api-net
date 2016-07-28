@@ -58,11 +58,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Snapshot.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StreamMultipartContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StringMultipartContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UploadFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UserInvitation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UserReference.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VersionUpload.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UploadVersionRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VersionUploadStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VirtualFile.cs" />
   </ItemGroup>
 </Project>

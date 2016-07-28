@@ -21,7 +21,7 @@ namespace PlanGrid.Api
             {
                 throw new ArgumentException("An ApiKey is required. Either pass it in to this method, add it to your App.config file, or set the environment variable \"PLANGRIDAPIKEY\".", nameof(apiKey));
             }
-            baseUrl = baseUrl ?? Settings.ApiBaseUrl ?? "https://io.plangrid.com";
+            baseUrl = baseUrl ?? Settings.ApiBaseUrl ?? Environment.GetEnvironmentVariable("PLANGRIDAPIURL") ?? "https://io.plangrid.com";
 
             string url = baseUrl;
             var settings = new RefitSettings
@@ -44,7 +44,7 @@ namespace PlanGrid.Api
                     BaseAddress = new Uri(url), Timeout = TimeSpan.FromSeconds(timeout)
                 },
                 settings);
-            api.Initialize(settings);
+            api.Initialize(apiKey, settings);
             return api;
         }
     }

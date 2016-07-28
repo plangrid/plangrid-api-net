@@ -27,6 +27,13 @@ namespace PlanGrid.Api
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            // The following is a hack to workaround the fact that the API currently requires a content-type on POST
+            // requests that contain no content.
+            if (request.Content == null && request.Method == HttpMethod.Post)
+            {
+                request.Content = new StringContent("", Encoding.UTF8, "application/json");
+            }
+
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authenticationToken);
             request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/vnd.plangrid+json; version=1"));
 

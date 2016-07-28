@@ -139,8 +139,8 @@ namespace PlanGrid.Api
         [Post("/projects/{projectUid}/sheets/uploads")]
         Task<VersionUpload> UploadVersion(string projectUid, [Body]UploadVersionRequest request);
 
-        [Post("/projects/{projectUid}/sheets/uploads/{versionUploadUid}")]
-        Task<FileUpload> UploadFileToVersion(string projectUid, string versionUploadUid);
+        [Post("/projects/{projectUid}/sheets/uploads/{versionUploadUid}/files/{fileUploadRequestUid}")]
+        Task<FileUpload> UploadFileToVersion(string projectUid, string versionUploadUid, string fileUploadRequestUid, [Body]UploadFile file);
 
         [Post("/projects/{projectUid}/sheets/uploads/files/completions/{uploadToken}")]
         Task CompleteFileUpload(string projectUid, string uploadToken);

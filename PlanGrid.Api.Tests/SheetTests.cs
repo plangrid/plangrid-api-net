@@ -31,8 +31,16 @@ namespace PlanGrid.Api.Tests
 
             Page<Sheet> sheets = await client.GetSheets(TestData.Project1Uid, updated_after: new DateTime(2015, 12, 11, 19, 38, 16, DateTimeKind.Utc));
             Assert.IsTrue(sheets.Data.Any());
-            sheets = await client.GetSheets(TestData.Project1Uid, updated_after: new DateTime(2015, 12, 11, 19, 39, 16, DateTimeKind.Utc));
+            sheets = await client.GetSheets(TestData.Project1Uid, updated_after: new DateTime(2016, 12, 11, 19, 39, 16, DateTimeKind.Utc));
             Assert.IsFalse(sheets.Data.Any());
+        }
+
+        [Test]
+        public async Task UploadNewVersion()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+
+            await client.UploadVersion(TestData.Project2Uid, $"Version.{Guid.NewGuid()}", new VirtualFile { FileName = "Sample.pdf", Data = typeof(SheetTests).Assembly.GetManifestResourceStream("PlanGrid.Api.Tests.TestData.Sample.pdf") });
         }
     }
 }
