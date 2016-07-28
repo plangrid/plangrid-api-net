@@ -13,7 +13,7 @@ namespace PlanGrid.Api
         [JsonProperty("resource_url")]
         public string ResourceUrl { get; set; }
 
-        [JsonProperty("url")]
-        public string Url { get; set; }
+        [JsonProperty("status")]
+        public Status Status { get; set; }
     }
 }

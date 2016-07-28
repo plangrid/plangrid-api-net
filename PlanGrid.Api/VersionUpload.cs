@@ -11,7 +11,7 @@ namespace PlanGrid.Api
         public string CompleteUrl { get; set; }
 
         [JsonProperty("status")]
-        public VersionUploadStatus Status { get; set; }
+        public Status Status { get; set; }
 
         [JsonProperty("file_upload_requests")]
         public FileUploadRequest[] FileUploadRequests { get; set; }

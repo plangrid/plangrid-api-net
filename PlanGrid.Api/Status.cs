@@ -2,7 +2,7 @@
 
 namespace PlanGrid.Api
 {
-    public enum VersionUploadStatus
+    public enum Status
     {
         [EnumMember(Value = "incomplete")]
         Incomplete,

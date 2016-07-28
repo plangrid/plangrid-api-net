@@ -54,6 +54,7 @@
     <Compile Include="ProjectsTests.cs" />
     <Compile Include="RfisTests.cs" />
     <Compile Include="RoleTests.cs" />
+    <Compile Include="SheetPacketTests.cs" />
     <Compile Include="SheetTests.cs" />
     <Compile Include="TestData.cs" />
     <Compile Include="UserTests.cs" />

@@ -149,9 +149,9 @@ namespace PlanGrid.Api
         Task CompleteVersionUpload(string projectUid, string versionUploadUid);
 
         [Post("/projects/{projectUid}/sheets/packets")]
-        Task<ShareableObject> CreateSheetPacket(string projectUid);
+        Task<ShareableObject> CreateSheetPacket(string projectUid, SheetPacketRequest request);
 
-        [Post("/projects/{projectUid}/sheets/packets/{packetUid}")]
+        [Get("/projects/{projectUid}/sheets/packets/{packetUid}")]
         Task<ShareableObject> GetSheetPacket(string projectUid, string packetUid);
     }
 }

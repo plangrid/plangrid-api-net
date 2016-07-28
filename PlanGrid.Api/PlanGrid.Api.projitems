@@ -55,6 +55,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ShareableObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sheet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SheetPacketRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Snapshot.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StreamMultipartContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StringMultipartContent.cs" />
@@ -64,7 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)UserReference.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VersionUpload.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UploadVersionRequest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)VersionUploadStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Status.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VirtualFile.cs" />
   </ItemGroup>
 </Project>
