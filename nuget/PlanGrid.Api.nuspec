@@ -9,7 +9,7 @@
 	  <releaseNotes>Public Release.</releaseNotes>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>PlanGrid .NET SDK to connect to the public PlanGrid API</description>
-    <copyright>Copyright 2015 PlanGrid Inc.</copyright>
+    <copyright>Copyright 2016 PlanGrid Inc.</copyright>
     <tags>plangrid api</tags>
     <dependencies>
       <dependency id="refit" version="2.4.1" />
