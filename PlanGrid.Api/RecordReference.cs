@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace PlanGrid.Api
 {
-    public class RecordReference<T>
+    public class RecordReference<T> where T : Record
     {
         [JsonProperty("uid")]
         public string Uid { get; set; }

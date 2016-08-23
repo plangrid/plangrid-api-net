@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace PlanGrid.Api
 {
-    public class Sheet
+    public class Sheet : Record
     {
-        [JsonProperty("uid")]
-        public string Uid { get; set; }
-
         [JsonProperty("name")]
         public string Name { get; set; }
 

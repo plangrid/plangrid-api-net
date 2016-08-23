@@ -22,6 +22,9 @@ namespace PlanGrid.Api
         [Patch("/projects/{projectUid}")]
         Task<Project> UpdateProject(string projectUid, [Body]ProjectUpdate project);
 
+        [Get("/projects/{projectUid}/comments")]
+        Task<Page<Comment>> GetComments(string projectUid, int skip = Page.Skip, int limit = Page.Limit, DateTime? updated_after = null, RecordType[] record_types = null);
+
         [Get("/projects/{projectUid}/users")]
         Task<Page<User>> GetUsers(string projectUid, int skip = Page.Skip, int limit = Page.Limit);
 
@@ -39,6 +42,9 @@ namespace PlanGrid.Api
 
         [Delete("/projects/{projectUid}/users/{userUid}")]
         Task RemoveUser(string projectUid, string userUid);
+
+        [Get("/projects/{projectUid}/issues/{issueUid}")]
+        Task<Issue> GetIssue(string projectUid, string issueUid);
 
         [Get("/projects/{projectUid}/issues")]
         Task<Page<Issue>> GetIssues(string projectUid, int skip = Page.Skip, int limit = Page.Limit);

@@ -10,8 +10,8 @@ namespace PlanGrid.Api
         [JsonProperty("file_url")]
         public string FileUrl { get; set; }
 
-        [JsonProperty("resource_url")]
-        public string ResourceUrl { get; set; }
+        [JsonProperty("resource")]
+        public ShareableObject Resource { get; set; }
 
         [JsonProperty("status")]
         public Status Status { get; set; }

@@ -20,5 +20,11 @@ namespace PlanGrid.Api
 
         [JsonProperty("created_by")]
         public UserReference CreatedBy { get; set; }
+
+        [JsonProperty("record_type")]
+        public RecordType RecordType { get; set; }
+
+        [JsonProperty("record")]
+        public RecordReference<Record> Record { get; set; }
     }
 }

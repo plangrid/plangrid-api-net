@@ -1,19 +1,19 @@
-﻿using System;
+﻿using System.Collections;
 using System.Reflection;
 using Refit;
 
 namespace PlanGrid.Api.JsonConverters
 {
-    public class DateUrlParameterFormatter : BaseUrlParameterFormatter
+    public class CommaSeparatedListUrlParameterFormatter : BaseUrlParameterFormatter
     {
         public override bool CanFormat(object argument, ParameterInfo parameter)
         {
-            return argument is DateTime;
+            return typeof(IList).IsAssignableFrom(parameter.ParameterType);
         }
 
         public override string Format(object value, ParameterInfo parameterInfo)
         {
-            return ((DateTime)value).ToString("yyyy-MM-ddTHH\\:mm\\:ss");
+            return string.Join(",", (IEnumerable)value);
         }
     }
 }

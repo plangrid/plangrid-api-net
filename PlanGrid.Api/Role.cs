@@ -6,11 +6,8 @@ using Newtonsoft.Json;
 
 namespace PlanGrid.Api
 {
-    public class Role
+    public class Role : Record
     {
-        [JsonProperty("uid")]
-        public string Uid { get; set; }
-
         [JsonProperty("label")]
         public string Label { get; set; }
     }

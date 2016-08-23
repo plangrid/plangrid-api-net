@@ -14,11 +14,13 @@ namespace PlanGrid.Api
     {
         public string ApiKey { get; private set; }
         public RefitSettings Settings { get; private set; }
+        public string Version { get; private set; }
 
-        public void Initialize(string apiKey, RefitSettings settings)
+        public void Initialize(string apiKey, RefitSettings settings, string version)
         {
             ApiKey = apiKey;
             Settings = settings;
+            Version = version;
 
             foreach (KeyValuePair<string, Func<HttpClient, object[], object>> methodImpl in methodImpls.ToArray())
             {

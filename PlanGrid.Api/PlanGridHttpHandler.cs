@@ -18,11 +18,13 @@ namespace PlanGrid.Api
     {
         private string authenticationToken;
         private RefitSettings settings;
+        private string version;
 
-        public PlanGridHttpHandler(string accessToken, RefitSettings settings)
+        public PlanGridHttpHandler(string accessToken, RefitSettings settings, string version)
         {
             authenticationToken = BuildAuthenticationToken(accessToken);
             this.settings = settings;
+            this.version = version;
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -35,11 +37,14 @@ namespace PlanGrid.Api
             }
 
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authenticationToken);
-            request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/vnd.plangrid+json; version=1"));
+            request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse($"application/vnd.plangrid+json; version={version}"));
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
+            Console.WriteLine(request.RequestUri);
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
+            Console.WriteLine();
 
-            if (response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.NotFound)
+            if (response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.Forbidden)
             {
                 string jsonString = await response.Content.ReadAsStringAsync();
                 var json = JsonConvert.DeserializeObject<FailedRequestResponse>(jsonString, settings.JsonSerializerSettings);
