@@ -26,7 +26,7 @@ namespace PlanGrid.Api
         public UserReference PublishedBy { get; set; }
 
         [JsonProperty("published_at")]
-        public DateTime PublishedAt { get; set; }
+        public DateTime? PublishedAt { get; set; }
 
         [JsonProperty("deleted")]
         public bool IsDeleted { get; set; }
