@@ -87,5 +87,14 @@ namespace PlanGrid.Api.Tests
             Attachment removedAttachment = await client.GetAttachment(TestData.Project2Uid, attachment.Uid);
             Assert.IsTrue(removedAttachment.IsDeleted);
         }
+
+        [Test]
+        public async Task GetAttachments()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            Page<Attachment> attachments = await client.GetAttachments(TestData.Project1Uid);
+            Assert.AreEqual(1, attachments.Data.Count(x => !x.IsDeleted));
+            Assert.AreEqual("49ffb02f-a28d-970e-e8bc-9256a4fbae1c", attachments.Data[0].Uid);
+        }
     }
 }

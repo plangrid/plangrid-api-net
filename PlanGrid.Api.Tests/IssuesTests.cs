@@ -19,6 +19,19 @@ namespace PlanGrid.Api.Tests
             Page<Issue> page = await client.GetIssues(TestData.Project1Uid);
             Assert.AreEqual(1, page.TotalCount);
             Issue issue = page.Data[0];
+            await ValidateIssue(issue, client);
+        }
+
+        [Test]
+        public async Task GetIssue()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            Issue issue = await client.GetIssue(TestData.Project1Uid, "45460feb-2c09-663f-352f-d053444b138a");
+            await ValidateIssue(issue, client);
+        }
+
+        private static async Task ValidateIssue(Issue issue, IPlanGridApi client)
+        {
             Assert.IsFalse(issue.IsDeleted);
             Assert.AreEqual(TestData.ApiTestsUserEmail, issue.AssignedTo.Single().Email);
             Assert.AreEqual(DateTime.Parse("11/16/2015 18:13:49"), issue.CreatedAt);
