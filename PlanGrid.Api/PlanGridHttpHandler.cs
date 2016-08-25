@@ -19,17 +19,19 @@ namespace PlanGrid.Api
         private string authenticationToken;
         private RefitSettings settings;
         private string version;
+        private int? maxRetries;
 
-        public PlanGridHttpHandler(string accessToken, RefitSettings settings, string version)
+        public PlanGridHttpHandler(string accessToken, RefitSettings settings, string version, int? maxRetries)
         {
             authenticationToken = BuildAuthenticationToken(accessToken);
             this.settings = settings;
             this.version = version;
+            this.maxRetries = maxRetries;
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            for (var i = 1;; i *= 2)
+            for (int i = 1; i < (maxRetries ?? int.MaxValue); i *= 2)
             {
                 // The following is a hack to workaround the fact that the API currently requires a content-type on POST
                 // requests that contain no content.
@@ -57,6 +59,7 @@ namespace PlanGrid.Api
 
                 return response;
             }
+            throw new FailedRequestException(HttpStatusCode.ServiceUnavailable, $"Service unavailable after retrying {maxRetries} times.");
         }
 
         private string BuildAuthenticationToken(string accessToken)
