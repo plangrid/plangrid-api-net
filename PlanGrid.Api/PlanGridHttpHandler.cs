@@ -40,9 +40,6 @@ namespace PlanGrid.Api
             request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse($"application/vnd.plangrid+json; version={version}"));
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
-            Console.WriteLine(request.RequestUri);
-            Console.WriteLine(await response.Content.ReadAsStringAsync());
-            Console.WriteLine();
 
             if (response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.Forbidden)
             {
