@@ -21,7 +21,19 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual(1, rfis.TotalCount);
 
             Rfi rfi = rfis.Data[0];
+            await ValidateRfi(rfi, client);
+        }
 
+        [Test]
+        public async Task GetRfi()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            Rfi rfi = await client.GetRfi(TestData.Project1Uid, TestData.Project1Rfi1Uid);
+            await ValidateRfi(rfi, client);
+        }
+
+        private async Task ValidateRfi(Rfi rfi, IPlanGridApi client)
+        {
             Page<RfiChange> history = await client.GetRfiHistory(TestData.Project1Uid, rfi.Uid);
             Assert.AreEqual("locked", history.Data[0].Field);
             Assert.AreEqual(true, (bool)history.Data[0].NewValue);
@@ -228,6 +240,11 @@ namespace PlanGrid.Api.Tests
             Page<Attachment> attachments = await client.GetRfiAttachments(TestData.Project2Uid, rfi.Uid);
             Attachment rfiAttachment = attachments.Data.Single();
             Assert.AreEqual(attachment.Uid, rfiAttachment.Uid);
+
+            await client.RemoveAttachmentFromRfi(TestData.Project2Uid, rfi.Uid, rfiAttachment.Uid);
+
+            attachments = await client.GetRfiAttachments(TestData.Project2Uid, rfi.Uid);
+            Assert.AreEqual(0, attachments.Data.Length);
         }
 
         [Test]
@@ -252,6 +269,26 @@ namespace PlanGrid.Api.Tests
             Page<Photo> photos = await client.GetRfiPhotos(TestData.Project2Uid, rfi.Uid);
             Photo rfiPhoto = photos.Data.Single();
             Assert.AreEqual(TestData.Project2PhotoUid, rfiPhoto.Uid);
+
+            await client.RemovePhotoFromRfi(TestData.Project2Uid, rfi.Uid, rfiPhoto.Uid);
+
+            photos = await client.GetRfiPhotos(TestData.Project2Uid, rfi.Uid);
+            Assert.AreEqual(0, photos.Data.Length);
         }
+
+/*
+The API does not currently support adding a reference to a snapshot, so we can't make a re-runnable test
+        [Test]
+        public async Task RemoveSnapshotFromRfi()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            Rfi rfi = await client.GetRfi(TestData.Project2Uid, "b1ea01e7-ecf1-473d-8cfe-a366e240dc67");
+            Page<Snapshot> attachments = await client.Resolve(rfi.Snapshots);
+            Assert.AreEqual(1, attachments.Data.Length);
+            await client.RemoveSnapshotFromRfi(TestData.Project2Uid, "b1ea01e7-ecf1-473d-8cfe-a366e240dc67", "0fe94c7e-30c6-4c30-81bd-0cec483cf813");
+            attachments = await client.Resolve(rfi.Snapshots);
+            Assert.AreEqual(0, attachments.Data.Length);
+        }
+*/
     }
 }

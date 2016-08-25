@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttachmentTests.cs" />
+    <Compile Include="CommentTests.cs" />
     <Compile Include="IssuesTests.cs" />
     <Compile Include="PhotoTests.cs" />
     <Compile Include="ProjectsTests.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="RoleTests.cs" />
     <Compile Include="SheetPacketTests.cs" />
     <Compile Include="SheetTests.cs" />
+    <Compile Include="SnapshotTests.cs" />
     <Compile Include="TestData.cs" />
     <Compile Include="UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

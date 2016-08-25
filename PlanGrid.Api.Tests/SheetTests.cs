@@ -13,6 +13,15 @@ namespace PlanGrid.Api.Tests
     public class SheetTests
     {
         [Test]
+        public async Task GetSheet()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+
+            Sheet sheet = await client.GetSheet(TestData.Project1Uid, "8e860282-2e05-4011-a538-d0a850857903");
+            Assert.AreEqual("IS.1", sheet.Name);
+        }
+
+        [Test]
         public async Task GetSheetsObeysSkip()
         {
             IPlanGridApi client = PlanGridClient.Create();

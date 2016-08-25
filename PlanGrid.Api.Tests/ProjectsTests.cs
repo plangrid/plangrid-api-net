@@ -42,6 +42,26 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual("Project 1", project.Name);
         }
 
+        [Test]
+        public async Task UpdateProject()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            Project project = await client.GetProject(TestData.Project2Uid);
+            string oldName = project.Name;
+            await client.UpdateProject(project.Uid, new ProjectUpdate
+            {
+                Name = oldName + "1"
+            });
+            project = await client.GetProject(TestData.Project2Uid);
+            Assert.AreEqual(oldName + "1", project.Name);
+            await client.UpdateProject(project.Uid, new ProjectUpdate
+            {
+                Name = oldName
+            });
+            project = await client.GetProject(TestData.Project2Uid);
+            Assert.AreEqual(oldName, project.Name);
+        }
+
 /*
         [Test]
         public async Task CreateProject()
