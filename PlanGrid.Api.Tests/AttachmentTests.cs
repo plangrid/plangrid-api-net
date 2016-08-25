@@ -94,7 +94,7 @@ namespace PlanGrid.Api.Tests
             IPlanGridApi client = PlanGridClient.Create();
             Page<Attachment> attachments = await client.GetAttachments(TestData.Project1Uid);
             Assert.AreEqual(1, attachments.Data.Count(x => !x.IsDeleted));
-            Assert.AreEqual("49ffb02f-a28d-970e-e8bc-9256a4fbae1c", attachments.Data[0].Uid);
+            Assert.AreEqual("354371ac-ee8f-bab7-8643-36285a2088a6", attachments.Data[0].Uid);
         }
     }
 }
