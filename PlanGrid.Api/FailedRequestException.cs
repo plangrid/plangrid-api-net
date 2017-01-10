@@ -9,6 +9,12 @@ namespace PlanGrid.Api
 
         public FailedRequestException(HttpStatusCode statusCode, string message) : base($"{(int)statusCode} ({statusCode}): {message}")
         {
+            StatusCode = statusCode;
+        }
+
+        public FailedRequestException(HttpStatusCode statusCode, string message, Exception innerException) : base(message, innerException)
+        {
+            StatusCode = statusCode;
         }
     }
 }

@@ -2,6 +2,8 @@
 //     Copyright (c) 2016 PlanGrid, Inc. All rights reserved.
 // </copyright>
 
+using System;
+
 namespace PlanGrid.Api.Tests
 {
     public static class TestData
@@ -21,5 +23,7 @@ namespace PlanGrid.Api.Tests
         public const string InvitedUserEmail = "kirk+apiinvitee@plangrid.com";
         public const string AdminRoleId = "2fdbafe9";
         public const string SnapshotUid = "59F884BA-1CDC-459C-B302-3532E13DBB9A";
+
+        public static readonly string RateLimitedPlanGridApiKey = Environment.GetEnvironmentVariable("PLANGRIDAPIKEY_LIMITED");
     }
 }

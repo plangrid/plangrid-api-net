@@ -53,6 +53,7 @@
     <Compile Include="IssuesTests.cs" />
     <Compile Include="PhotoTests.cs" />
     <Compile Include="ProjectsTests.cs" />
+    <Compile Include="RateLimitTests.cs" />
     <Compile Include="RfisTests.cs" />
     <Compile Include="RoleTests.cs" />
     <Compile Include="SheetPacketTests.cs" />

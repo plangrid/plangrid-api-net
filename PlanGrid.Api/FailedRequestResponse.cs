@@ -9,5 +9,8 @@ namespace PlanGrid.Api
     {
         [JsonProperty("message")]
         public string Message { get; set; }
+
+        [JsonProperty("rate_limit")]
+        public RateLimit RateLimit { get; set; }
     }
 }
