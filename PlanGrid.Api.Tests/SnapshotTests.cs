@@ -18,6 +18,15 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual("AR.1", snapshot.Title);
         }
 
+        [Test]
+        public async Task GetSnapshots()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            Page<Snapshot> snapshots = await client.GetSnapshots(TestData.Project1Uid);
+            Assert.AreEqual(1, snapshots.Data.Length);
+            Assert.AreEqual("AR.1", snapshots.Data[0].Title);
+        }
+
 /*
 Can't create snapshots via the API so no great way to make a consistently runnable test.
         [Test]
