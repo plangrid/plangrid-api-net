@@ -42,13 +42,18 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual(IssueStatus.Open, issue.Status);
             Assert.AreEqual(TestData.ApiTestsUserEmail, issue.UpdatedBy.Email);
             Assert.IsFalse(string.IsNullOrEmpty(issue.Uid));
-            Assert.AreEqual(DateTime.Parse("11/16/2015 18:13:50"), issue.UpdatedAt);
+            Assert.AreEqual("01/10/2017 11:38:44.38", issue.UpdatedAt.ToString(@"MM/dd/yyyy hh\:mm\:ss\.mmm"));
             Assert.IsFalse(issue.IsDeleted);
             Assert.AreEqual("#FF0000", issue.CurrentAnnotation.Color);
             Assert.IsFalse(issue.CurrentAnnotation.IsDeleted);
             Assert.AreEqual("AC", issue.CurrentAnnotation.Stamp);
             Assert.IsFalse(string.IsNullOrEmpty(issue.CurrentAnnotation.Uid));
             Assert.AreEqual(AnnotationVisibility.Master, issue.CurrentAnnotation.Visibility);
+            Assert.AreEqual(new DateTime(2020, 1, 2), issue.DueAt);
+            Assert.IsTrue(issue.HasCostImpact);
+            Assert.AreEqual(99999.99, issue.CostImpact);
+            Assert.IsTrue(issue.HasScheduleImpact);
+            Assert.AreEqual(99999999, issue.ScheduleImpactDays);
 
             Sheet sheet = await client.Resolve(issue.CurrentAnnotation.Sheet);
             Assert.AreEqual("AR.1", sheet.Name);

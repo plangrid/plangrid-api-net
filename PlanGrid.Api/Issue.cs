@@ -47,5 +47,38 @@ namespace PlanGrid.Api
 
         [JsonProperty("deleted")]
         public bool IsDeleted { get; set; }
+
+        [JsonProperty("due_at")]
+        public DateTime DueAt { get; set; }
+
+        [JsonProperty("has_cost_impact")]
+        public bool HasCostImpact { get; set; }
+
+        /// <summary>
+        /// The cost impact in dollars and cents.
+        /// </summary>
+        [JsonProperty("cost_impact")]
+        public decimal CostImpact { get; set; }
+
+        [JsonProperty("currency_code")]
+        public string CurrencyCode { get; set; }
+
+        [JsonProperty("has_schedule_impact")]
+        public bool HasScheduleImpact { get; set; }
+
+        /// <summary>
+        /// The schedule impact in seconds.
+        /// </summary>
+        [JsonProperty("schedule_impact")]
+        public long ScheduleImpact { get; set; }
+
+        private const int DayInSeconds = 60 * 60 * 24;
+
+        [JsonIgnore]
+        public int ScheduleImpactDays
+        {
+            get { return (int)(ScheduleImpact / (DayInSeconds)); }
+            set { ScheduleImpact = value * DayInSeconds; }
+        }
     }
 }
