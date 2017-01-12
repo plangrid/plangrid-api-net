@@ -16,6 +16,7 @@ namespace PlanGrid.Api.Tests
         public async Task GetRole()
         {
             IPlanGridApi api = PlanGridClient.Create();
+            var roles = await api.GetRoles(TestData.Project1Uid);
             Role role = await api.GetRole(TestData.Project1Uid, TestData.AdminRoleId);
             Assert.AreEqual("Admin", role.Label);
         }
