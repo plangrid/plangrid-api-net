@@ -42,7 +42,7 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual(IssueStatus.Open, issue.Status);
             Assert.AreEqual(TestData.ApiTestsUserEmail, issue.UpdatedBy.Email);
             Assert.IsFalse(string.IsNullOrEmpty(issue.Uid));
-            Assert.AreEqual(DateTime.Parse("11/16/2015 18:13:50"), issue.UpdatedAt);
+            Assert.AreEqual("01/10/2017 11:38:44.38", issue.UpdatedAt.ToString(@"MM/dd/yyyy hh\:mm\:ss\.mmm"));
             Assert.IsFalse(issue.IsDeleted);
             Assert.AreEqual("#FF0000", issue.CurrentAnnotation.Color);
             Assert.IsFalse(issue.CurrentAnnotation.IsDeleted);
