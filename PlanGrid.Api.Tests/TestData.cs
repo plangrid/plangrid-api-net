@@ -19,7 +19,7 @@ namespace PlanGrid.Api.Tests
         public const string ApiTestsUser2Email = "kirk+apitests2@plangrid.com";
         public const string ApiTestsUser2Uid = "569e7cf89a5775ea157c9032";
         public const string InvitedUserEmail = "kirk+apiinvitee@plangrid.com";
-        public const string AdminRoleId = "2fdbafe9";
+        public const string AdminRoleId = "9d139e64-cac9-4f23-b4d5-9fd3688b498e";
         public const string SnapshotUid = "59F884BA-1CDC-459C-B302-3532E13DBB9A";
     }
 }
