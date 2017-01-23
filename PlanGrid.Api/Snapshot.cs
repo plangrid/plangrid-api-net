@@ -24,6 +24,9 @@ namespace PlanGrid.Api
         [JsonProperty("created_by")]
         public UserReference CreatedBy { get; set; }
 
+        [JsonProperty("sheet")]
+        public RecordReference<Sheet> Sheet { get; set; }
+
         [JsonProperty("deleted")]
         public bool IsDeleted { get; set; }
     }

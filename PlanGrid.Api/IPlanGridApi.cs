@@ -159,5 +159,11 @@ namespace PlanGrid.Api
 
         [Get("/projects/{projectUid}/sheets/packets/{packetUid}")]
         Task<ShareableObject> GetSheetPacket(string projectUid, string packetUid);
+
+        [Get("/rate_limits")]
+        Task<Page<RateLimit>> GetRateLimits(int skip = Page.Skip, int limit = Page.Limit);
+
+        [Get("/projects/{projectUid}/snapshots")]
+        Task<Page<Snapshot>> GetSnapshots(string projectUid, int skip = Page.Skip, int limit = Page.Limit, DateTime? updated_after = null);
     }
 }

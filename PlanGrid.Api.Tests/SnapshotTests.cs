@@ -16,6 +16,18 @@ namespace PlanGrid.Api.Tests
             IPlanGridApi client = PlanGridClient.Create();
             Snapshot snapshot = await client.GetSnapshot(TestData.Project1Uid, TestData.SnapshotUid);
             Assert.AreEqual("AR.1", snapshot.Title);
+
+            Sheet sheet = await client.Resolve(snapshot.Sheet);
+            Assert.AreEqual("AR.1", sheet.Name);
+        }
+
+        [Test]
+        public async Task GetSnapshots()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            Page<Snapshot> snapshots = await client.GetSnapshots(TestData.Project1Uid);
+            Assert.AreEqual(1, snapshots.Data.Length);
+            Assert.AreEqual("AR.1", snapshots.Data[0].Title);
         }
 
 /*

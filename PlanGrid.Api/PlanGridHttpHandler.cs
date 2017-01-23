@@ -16,6 +16,8 @@ namespace PlanGrid.Api
 {
     public class PlanGridHttpHandler : HttpClientHandler
     {
+        public const HttpStatusCode RateLimitExceeded = (HttpStatusCode)429;
+
         private string authenticationToken;
         private RefitSettings settings;
         private string version;
@@ -50,11 +52,26 @@ namespace PlanGrid.Api
                     continue;
                 }
 
-                if (response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.Forbidden)
+                if (response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.Forbidden || response.StatusCode == RateLimitExceeded)
                 {
                     string jsonString = await response.Content.ReadAsStringAsync();
-                    var json = JsonConvert.DeserializeObject<FailedRequestResponse>(jsonString, settings.JsonSerializerSettings);
-                    throw new FailedRequestException(response.StatusCode, json.Message);
+                    FailedRequestResponse json;
+                    try
+                    {
+                        json = JsonConvert.DeserializeObject<FailedRequestResponse>(jsonString, settings.JsonSerializerSettings);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new FailedRequestException(response.StatusCode, $"Failed to parse response from server: {jsonString}", ex);
+                    }
+                    if (response.StatusCode == RateLimitExceeded)
+                    {
+                        throw new RateLimitExceededException(response.StatusCode, json.Message, json.RateLimit);
+                    }
+                    else
+                    {
+                        throw new FailedRequestException(response.StatusCode, json.Message);
+                    }
                 }
 
                 return response;

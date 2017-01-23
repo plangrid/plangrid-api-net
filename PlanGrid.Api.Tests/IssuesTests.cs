@@ -49,6 +49,11 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual("AC", issue.CurrentAnnotation.Stamp);
             Assert.IsFalse(string.IsNullOrEmpty(issue.CurrentAnnotation.Uid));
             Assert.AreEqual(AnnotationVisibility.Master, issue.CurrentAnnotation.Visibility);
+            Assert.AreEqual(new DateTime(2020, 1, 2), issue.DueAt);
+            Assert.IsTrue(issue.HasCostImpact);
+            Assert.AreEqual(99999.99, issue.CostImpact);
+            Assert.IsTrue(issue.HasScheduleImpact);
+            Assert.AreEqual(99999999, issue.ScheduleImpactDays);
 
             Sheet sheet = await client.Resolve(issue.CurrentAnnotation.Sheet);
             Assert.AreEqual("AR.1", sheet.Name);
