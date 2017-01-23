@@ -13,7 +13,7 @@ namespace PlanGrid.Api
         public int Number { get; set; }
 
         [JsonProperty("current_annotation")]
-        public IssueAnnotation CurrentAnnotation { get; set; }
+        public Annotation CurrentAnnotation { get; set; }
 
         [JsonProperty("room")]
         public string Room { get; set; }

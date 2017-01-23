@@ -35,7 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Date.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IMultipartContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Issue.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IssueAnnotation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Annotation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IssueAnnotationSheet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IssueStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonConverters\DateConverter.cs" />

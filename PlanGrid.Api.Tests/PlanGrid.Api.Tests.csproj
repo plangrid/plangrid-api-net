@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnnotationTests.cs" />
     <Compile Include="AttachmentTests.cs" />
     <Compile Include="CommentTests.cs" />
     <Compile Include="IssuesTests.cs" />

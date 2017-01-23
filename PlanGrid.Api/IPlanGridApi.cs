@@ -159,5 +159,8 @@ namespace PlanGrid.Api
 
         [Get("/projects/{projectUid}/sheets/packets/{packetUid}")]
         Task<ShareableObject> GetSheetPacket(string projectUid, string packetUid);
+
+        [Get("/projects/{projectUid}/annotations")]
+        Task<Page<Annotation>> GetAnnotations(string projectUid, int skip = Page.Skip, int limit = Page.Limit, DateTime? updated_after = null);
     }
 }

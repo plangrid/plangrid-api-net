@@ -1,4 +1,4 @@
-﻿// <copyright file="IssueAnnotation.cs" company="PlanGrid, Inc.">
+﻿// <copyright file="Annotation.cs" company="PlanGrid, Inc.">
 //     Copyright (c) 2016 PlanGrid, Inc. All rights reserved.
 // </copyright>
 
@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace PlanGrid.Api
 {
-    public class IssueAnnotation
+    public class Annotation
     {
         [JsonProperty("uid")]
         public string Uid { get; set; }
