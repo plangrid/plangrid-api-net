@@ -44,7 +44,9 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual("Test Rfi", rfi.Title);
             Assert.AreEqual(1, rfi.Number);
             Assert.AreEqual(Date.Parse("2015-11-18"), rfi.SentDate);
+            Assert.AreEqual(DateTime.Parse("2015/11/18 19:30:21.000"), rfi.SentAt);
             Assert.AreEqual(Date.Parse("2015-11-19"), rfi.DueDate);
+            Assert.AreEqual(DateTime.Parse("2015/11/19 19:30:13.000"), rfi.DueAt);
             Assert.AreEqual(DateTime.Parse("11/17/2015 20:06:48.115"), rfi.UpdatedAt);
             Assert.AreEqual(DateTime.Parse("11/16/2015 21:48:26.641"), rfi.CreatedAt);
             Assert.AreEqual("kirk+apitests@plangrid.com", rfi.AssignedTo[0].Email);

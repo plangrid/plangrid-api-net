@@ -33,8 +33,14 @@ namespace PlanGrid.Api
         [JsonProperty("sent_date")]
         public Date? SentDate { get; set; }
 
+        [JsonProperty("sent_at")]
+        public DateTime? SentAt { get; set; }
+
         [JsonProperty("due_date")]
         public Date? DueDate { get; set; }
+
+        [JsonProperty("due_at")]
+        public DateTime? DueAt { get; set; }
 
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
