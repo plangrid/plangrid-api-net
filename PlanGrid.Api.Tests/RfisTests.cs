@@ -43,9 +43,7 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual("Test Rfi Question", rfi.Question);
             Assert.AreEqual("Test Rfi", rfi.Title);
             Assert.AreEqual(1, rfi.Number);
-            Assert.AreEqual(Date.Parse("2015-11-18"), rfi.SentDate);
             Assert.AreEqual(DateTime.Parse("2015/11/18 19:30:21.000"), rfi.SentAt);
-            Assert.AreEqual(Date.Parse("2015-11-19"), rfi.DueDate);
             Assert.AreEqual(DateTime.Parse("2015/11/19 19:30:13.000"), rfi.DueAt);
             Assert.AreEqual(DateTime.Parse("11/17/2015 20:06:48.115"), rfi.UpdatedAt);
             Assert.AreEqual(DateTime.Parse("11/16/2015 21:48:26.641"), rfi.CreatedAt);
@@ -145,9 +143,9 @@ namespace PlanGrid.Api.Tests
                 Question = "test question",
                 Answer = "test answer",
                 AssignedTo = new[] { TestData.ApiTestsUserUid },
-                DueDate = new DateTime(2020, 1, 1),
+                DueAt = new DateTime(2020, 1, 1),
                 IsLocked = true,
-                SentDate = new DateTime(2019, 1, 1),
+                SentAt = new DateTime(2019, 1, 1),
                 StatusUid = TestData.Project2DraftRfiStatusUid,
                 Title = "test title"
             };
@@ -155,9 +153,9 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual(rfiInsert.Question, rfi.Question);
             Assert.AreEqual(rfiInsert.Answer, rfi.Answer);
             Assert.AreEqual(rfiInsert.AssignedTo[0], rfi.AssignedTo[0].Uid);
-            Assert.AreEqual(rfiInsert.DueDate, rfi.DueDate);
+            Assert.AreEqual(rfiInsert.DueAt, rfi.DueAt);
             Assert.AreEqual(rfiInsert.IsLocked, rfi.IsLocked);
-            Assert.AreEqual(rfiInsert.SentDate, rfi.SentDate);
+            Assert.AreEqual(rfiInsert.SentAt, rfi.SentAt);
             Assert.AreEqual(rfiInsert.StatusUid, rfi.Status.Uid);
             Assert.AreEqual(rfiInsert.Title, rfi.Title);
             Assert.AreEqual(TestData.ApiTestsUserUid, rfi.CreatedBy.Uid);
@@ -175,9 +173,9 @@ namespace PlanGrid.Api.Tests
                 Question = "test question",
                 Answer = "test answer",
                 AssignedTo = new[] { TestData.ApiTestsUserUid },
-                DueDate = new DateTime(2020, 1, 1),
+                DueAt = new DateTime(2020, 1, 1),
                 IsLocked = true,
-                SentDate = new DateTime(2019, 1, 1),
+                SentAt = new DateTime(2019, 1, 1),
                 StatusUid = TestData.Project2DraftRfiStatusUid,
                 Title = "test title"
             };
@@ -188,9 +186,9 @@ namespace PlanGrid.Api.Tests
                 Question = "test question2",
                 Answer = "test answer2",
                 AssignedTo = new[] { TestData.ApiTestsUser2Uid },
-                DueDate = new DateTime(2020, 1, 2),
+                DueAt = new DateTime(2020, 1, 2),
                 IsLocked = false,
-                SentDate = new DateTime(2019, 1, 2),
+                SentAt = new DateTime(2019, 1, 2),
                 StatusUid = TestData.Project2OpenRfiStatusUid,
                 Title = "test title2"
             };
@@ -199,9 +197,9 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual(rfiUpdate.Question, rfi.Question);
             Assert.AreEqual(rfiUpdate.Answer, rfi.Answer);
             Assert.AreEqual(rfiUpdate.AssignedTo[0], rfi.AssignedTo[0].Uid);
-            Assert.AreEqual(rfiUpdate.DueDate, rfi.DueDate);
+            Assert.AreEqual(rfiUpdate.DueAt, rfi.DueAt);
             Assert.AreEqual(rfiUpdate.IsLocked, rfi.IsLocked);
-            Assert.AreEqual(rfiUpdate.SentDate, rfi.SentDate);
+            Assert.AreEqual(rfiUpdate.SentAt, rfi.SentAt);
             Assert.AreEqual(rfiUpdate.StatusUid, rfi.Status.Uid);
             Assert.AreEqual(rfiUpdate.Title, rfi.Title);
             Assert.AreEqual(TestData.ApiTestsUserUid, rfi.CreatedBy.Uid);
@@ -219,9 +217,9 @@ namespace PlanGrid.Api.Tests
                 Question = "test question",
                 Answer = "test answer",
                 AssignedTo = new[] { TestData.ApiTestsUserUid },
-                DueDate = new DateTime(2020, 1, 1),
+                DueAt = new DateTime(2020, 1, 1),
                 IsLocked = false,
-                SentDate = new DateTime(2019, 1, 1),
+                SentAt = new DateTime(2019, 1, 1),
                 StatusUid = TestData.Project2DraftRfiStatusUid,
                 Title = "test title"
             };
@@ -258,9 +256,9 @@ namespace PlanGrid.Api.Tests
                 Question = "test question",
                 Answer = "test answer",
                 AssignedTo = new[] { TestData.ApiTestsUserUid },
-                DueDate = new DateTime(2020, 1, 1),
+                DueAt = new DateTime(2020, 1, 1),
                 IsLocked = false,
-                SentDate = new DateTime(2019, 1, 1),
+                SentAt = new DateTime(2019, 1, 1),
                 StatusUid = TestData.Project2DraftRfiStatusUid,
                 Title = "test title"
             };
