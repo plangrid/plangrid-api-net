@@ -21,6 +21,9 @@ namespace PlanGrid.Api
         [JsonProperty("description")]
         public string Description { get; set; }
 
+        [JsonProperty("title")]
+        public string Title { get; set; }
+
         [JsonProperty("assigned_to")]
         public UserReference[] AssignedTo { get; set; }
 

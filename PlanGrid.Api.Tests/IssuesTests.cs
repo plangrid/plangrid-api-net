@@ -37,6 +37,7 @@ namespace PlanGrid.Api.Tests
             Assert.AreEqual(DateTime.Parse("11/16/2015 18:13:49"), issue.CreatedAt);
             Assert.AreEqual(TestData.ApiTestsUserEmail, issue.CreatedBy.Email);
             Assert.AreEqual("Test Description", issue.Description);
+            Assert.AreEqual("Acoustical Ceiling", issue.Title);
             Assert.AreEqual(1, issue.Number);
             Assert.AreEqual("Test Room", issue.Room);
             Assert.AreEqual(IssueStatus.Open, issue.Status);
