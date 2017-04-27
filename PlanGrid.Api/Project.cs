@@ -1,7 +1,6 @@
 ﻿// <copyright file="Project.cs" company="PlanGrid, Inc.">
 //     Copyright (c) 2016 PlanGrid, Inc. All rights reserved.
 // </copyright>
-using System;
 using Newtonsoft.Json;
 
 namespace PlanGrid.Api
@@ -24,10 +23,10 @@ namespace PlanGrid.Api
         public string Owner { get; set; }
 
         [JsonProperty("start_date")]
-        public DateTime? StartDate { get; set; }
+        public Date? StartDate { get; set; }
 
         [JsonProperty("end_date")]
-        public DateTime? EndDate { get; set; }
+        public Date? EndDate { get; set; }
 
         [JsonProperty("street_1")]
         public string Street1 { get; set; }
