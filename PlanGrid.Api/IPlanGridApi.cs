@@ -165,5 +165,8 @@ namespace PlanGrid.Api
 
         [Get("/projects/{projectUid}/snapshots")]
         Task<Page<Snapshot>> GetSnapshots(string projectUid, int skip = Page.Skip, int limit = Page.Limit, DateTime? updated_after = null);
+
+        [Get("/projects/{projectUid}/version_sets")]
+        Task<Page<VersionSet>> GetVersionSets(string projectUid, int skip = Page.Skip, int limit = Page.Limit);
     }
 }
