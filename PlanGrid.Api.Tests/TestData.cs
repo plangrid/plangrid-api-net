@@ -23,7 +23,11 @@ namespace PlanGrid.Api.Tests
         public const string InvitedUserEmail = "kirk+apiinvitee@plangrid.com";
         public const string AdminRoleId = "9d139e64-cac9-4f23-b4d5-9fd3688b498e";
         public const string SnapshotUid = "59F884BA-1CDC-459C-B302-3532E13DBB9A";
+        public const string VersionSet1Uid = "f160b073-c249-4246-8e77-c53ec3c272e0";
+        public const string VersionSet1Name = "Initial Set";
+        public static DateTime VersionSet1PublishDate => new DateTime(2015, 11, 12);
 
         public static readonly string RateLimitedPlanGridApiKey = Environment.GetEnvironmentVariable("PLANGRIDAPIKEY_LIMITED");
+
     }
 }
