@@ -131,7 +131,7 @@ namespace PlanGrid.Api
         Task<Photo> UpdatePhoto(string projectUid, string photoUid, [Body]PhotoUpdate photo);
 
         [Get("/projects/{projectUid}/sheets")]
-        Task<Page<Sheet>> GetSheets(string projectUid, int skip = Page.Skip, int limit = Page.Limit, DateTime? updated_after = null);
+        Task<Page<Sheet>> GetSheets(string projectUid, int skip = Page.Skip, int limit = Page.Limit, DateTime? updated_after = null, string version_set = null);
 
         [Get("/projects/{projectUid}/snapshots/{snapshotUid}")]
         Task<Snapshot> GetSnapshot(string projectUid, string snapshotUid);

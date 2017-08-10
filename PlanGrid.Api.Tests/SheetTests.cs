@@ -51,5 +51,15 @@ namespace PlanGrid.Api.Tests
 
             await client.UploadVersion(TestData.Project2Uid, $"Version.{Guid.NewGuid()}", new VirtualFile { FileName = "Sample.pdf", Data = typeof(SheetTests).Assembly.GetManifestResourceStream("PlanGrid.Api.Tests.TestData.Sample.pdf") });
         }
+
+        [Test]
+        public async Task GetSheetsByVersionSet()
+        {
+            IPlanGridApi client = PlanGridClient.Create();
+            Page<Sheet> sheets = await client.GetSheets(TestData.Project1Uid, version_set: TestData.Project1VersionSet1Uid);
+            Assert.Less(0, sheets.Data.Length);
+            Page<Sheet> sheets_empty = await client.GetSheets(TestData.Project1Uid, version_set: TestData.NotFoundUid);
+            Assert.AreEqual(0, sheets_empty.Data.Length);
+        }
     }
 }
