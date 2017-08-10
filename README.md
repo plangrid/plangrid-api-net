@@ -57,6 +57,21 @@ To get the next 20 projects (after the first 50), you would call:
 
     projects = await api.GetProjects(50, 20);
 
+## Running Tests
+
+You're free to open a pull-request and have the rest runner run the suite of tests
+for you. If you want to run the tests locally, you will need to setup a few things.
+
+1. NUnit 2 Test Adapter. You can install the test adapter in your IDE by
+opening the Extensions manager (Tools > Extensions and Updates).
+
+1. Visual Studio needs to be configured to run as an Administrator. You can follow
+the directions on this [StackOverflow](https://stackoverflow.com/questions/12257110)
+question is you need assistance.
+
+1. Finally, you will need to setup environment variables that the tests will use to run.
+Contact a repo administrator to get the most current settings/their values.
+
 ## Copyright
 
 Copyright &copy; PlanGrid, Inc. MIT License; see LICENSE for further details.
