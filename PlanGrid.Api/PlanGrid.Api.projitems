@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AttachmentReference.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AttachmentUpdate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AttachmentUpload.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VersionSet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileUploadRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileUploadRequestStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonConverters\BaseUrlParameterFormatter.cs" />
