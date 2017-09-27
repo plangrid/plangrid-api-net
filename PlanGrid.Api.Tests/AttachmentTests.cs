@@ -19,17 +19,18 @@ namespace PlanGrid.Api.Tests
         public async Task UploadAttachment()
         {
             IPlanGridApi client = PlanGridClient.Create();
+            var docName = Guid.NewGuid().ToString();
             FileUpload request = await client.CreateAttachmentUploadRequest(TestData.Project2Uid, new AttachmentUpload
             {
                 ContentType = AttachmentUpload.Pdf,
-                Name = "test name",
+                Name = docName,
                 Folder = "test folder"
             });
 
             Stream payload = typeof(AttachmentTests).Assembly.GetManifestResourceStream("PlanGrid.Api.Tests.TestData.Sample.pdf");
             Attachment attachment = await client.Upload<Attachment>(request, payload);
 
-            Assert.AreEqual("test name", attachment.Name);
+            Assert.AreEqual(docName, attachment.Name);
             Assert.AreEqual("test folder", attachment.Folder);
             Assert.AreEqual(TestData.ApiTestsUserUid, attachment.CreatedBy.Uid);
             Assert.AreNotEqual(attachment.CreatedAt, default(DateTime));
@@ -57,10 +58,11 @@ namespace PlanGrid.Api.Tests
         public async Task UploadPdfAttachment()
         {
             IPlanGridApi client = PlanGridClient.Create();
+            var docName = Guid.NewGuid().ToString();
             Stream payload = typeof(AttachmentTests).Assembly.GetManifestResourceStream("PlanGrid.Api.Tests.TestData.Sample.pdf");
-            Attachment attachment = await client.UploadPdfAttachment(TestData.Project2Uid, "test name", payload, "test folder");
+            Attachment attachment = await client.UploadPdfAttachment(TestData.Project2Uid, docName, payload, "test folder");
 
-            Assert.AreEqual("test name", attachment.Name);
+            Assert.AreEqual(docName, attachment.Name);
             Assert.AreEqual("test folder", attachment.Folder);
             Assert.AreEqual(TestData.ApiTestsUserUid, attachment.CreatedBy.Uid);
             Assert.AreNotEqual(attachment.CreatedAt, default(DateTime));
@@ -78,9 +80,10 @@ namespace PlanGrid.Api.Tests
 
             Attachment retrievedAttachment = await client.GetAttachment(TestData.Project2Uid, attachment.Uid);
             Assert.IsFalse(retrievedAttachment.IsDeleted);
-            await client.UpdateAttachment(TestData.Project2Uid, attachment.Uid, new AttachmentUpdate { Name = "new name", Folder = "new folder" });
+            var newDocName = Guid.NewGuid().ToString();
+            await client.UpdateAttachment(TestData.Project2Uid, attachment.Uid, new AttachmentUpdate { Name = newDocName, Folder = "new folder" });
             retrievedAttachment = await client.GetAttachment(TestData.Project2Uid, attachment.Uid);
-            Assert.AreEqual("new name", retrievedAttachment.Name);
+            Assert.AreEqual(newDocName, retrievedAttachment.Name);
             Assert.AreEqual("new folder", retrievedAttachment.Folder);
 
             await client.RemoveAttachment(TestData.Project2Uid, attachment.Uid);
