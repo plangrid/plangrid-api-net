@@ -39,6 +39,16 @@ namespace PlanGrid.Api.Tests
         }
 
         [Test]
+        public async Task GetUserProfile()
+        {
+            IPlanGridApi api = PlanGridClient.Create();
+            User user = await api.GetUserProfile();
+
+            Assert.AreEqual(TestData.ApiTestsUserEmail, user.Email);
+            Assert.IsTrue(!string.IsNullOrEmpty(user.Uid));
+        }
+
+        [Test]
         public async Task InviteAndRemoveUser()
         {
             IPlanGridApi api = PlanGridClient.Create();

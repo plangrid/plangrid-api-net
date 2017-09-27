@@ -31,6 +31,9 @@ namespace PlanGrid.Api
         [Get("/projects/{projectUid}/users/{userUid}")]
         Task<User> GetUser(string projectUid, string userUid);
 
+        [Get("/me")]
+        Task<User> GetUserProfile();
+
         [Get("/projects/{projectUid}/roles")]
         Task<Page<Role>> GetRoles(string projectUid, int skip = Page.Skip, int limit = Page.Limit);
 
