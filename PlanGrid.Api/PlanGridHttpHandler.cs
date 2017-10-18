@@ -19,13 +19,15 @@ namespace PlanGrid.Api
         public const HttpStatusCode RateLimitExceeded = (HttpStatusCode)429;
 
         private string authenticationToken;
+        private TokenType tokenType;
         private RefitSettings settings;
         private string version;
         private int? maxRetries;
 
-        public PlanGridHttpHandler(string accessToken, RefitSettings settings, string version, int? maxRetries)
+        public PlanGridHttpHandler(string accessToken, RefitSettings settings, string version, int? maxRetries, TokenType tokenType = TokenType.Basic)
         {
-            authenticationToken = BuildAuthenticationToken(accessToken);
+            authenticationToken = BuildAuthenticationToken(accessToken, tokenType);
+            this.tokenType = tokenType;
             this.settings = settings;
             this.version = version;
             this.maxRetries = maxRetries;
@@ -42,7 +44,7 @@ namespace PlanGrid.Api
                     request.Content = new StringContent("", Encoding.UTF8, "application/json");
                 }
 
-                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authenticationToken);
+                request.Headers.Authorization = new AuthenticationHeaderValue(this.tokenType, authenticationToken);
                 request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse($"application/vnd.plangrid+json; version={version}"));
 
                 HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
@@ -79,12 +81,18 @@ namespace PlanGrid.Api
             throw new FailedRequestException(HttpStatusCode.ServiceUnavailable, $"Service unavailable after retrying {maxRetries} times.");
         }
 
-        private string BuildAuthenticationToken(string accessToken)
+        private string BuildAuthenticationToken(string accessToken, TokenType tokenType)
         {
-            string unencoded = $"{accessToken}:";
-            byte[] authParamBytes = Encoding.ASCII.GetBytes(unencoded);
-            string encodedAuthParams = Convert.ToBase64String(authParamBytes);
-            return encodedAuthParams;
+            if (tokenType == TokenType.Basic)
+            {
+                string unencoded = $"{accessToken}:";
+                byte[] authParamBytes = Encoding.ASCII.GetBytes(unencoded);
+                string encodedAuthParams = Convert.ToBase64String(authParamBytes);
+                return encodedAuthParams;
+            } else if (tokenType == TokenType.Bearer)
+            {
+                return accessToken;
+            }
         }
     }
 }
