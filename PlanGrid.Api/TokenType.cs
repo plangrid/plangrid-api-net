@@ -1,10 +1,13 @@
 using System.Runtime.Serialization;
 
-public enum TokenType
+namespace PlanGrid.Api
 {
-    [EnumMember(Value = "Basic")]
-    Basic,
+    public enum TokenType
+    {
+        [EnumMember(Value = "Basic")]
+        Basic,
 
-    [EnumMember(Value = "Bearer")]
-    Bearer
+        [EnumMember(Value = "Bearer")]
+        Bearer
+    }
 }
