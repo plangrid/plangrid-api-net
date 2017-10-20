@@ -83,7 +83,7 @@ namespace PlanGrid.Api
 
         private string BuildAuthenticationToken(string accessToken, TokenType tokenType)
         {
-            switch (TokenType)
+            switch (tokenType)
             {
                 case TokenType.Basic:
                     string unencoded = $"{accessToken}:";
@@ -92,6 +92,8 @@ namespace PlanGrid.Api
                     return encodedAuthParams;
                 case TokenType.Bearer:
                     return accessToken;
+                default:
+                    throw new InvalidEnumArgumentException();
             }
         }
     }
