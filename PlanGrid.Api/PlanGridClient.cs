@@ -24,7 +24,7 @@ namespace PlanGrid.Api
         /// <param name="maxRetries">The maximum number of attempts to make contacting the server in the event of a 503 service unavailable repsonse.  This defaults to unlimited retries, with a delay between each attempt that multiplies by two.</param>
         /// <param name="keyType">The type of API key provided by PlanGrid.</param>
         /// <returns>An interface upon which you can invoke the various methods exposed via the Public PlanGrid API.</returns>
-        public static IPlanGridApi Create(string apiKey = null, string baseUrl = null, string version = "1", int timeout = 60, int? maxRetries = null, TokenType keyType = TokenType)
+        public static IPlanGridApi Create(string apiKey = null, string baseUrl = null, string version = "1", int timeout = 60, int? maxRetries = null, TokenType keyType = TokenType.Basic)
         {
             apiKey = apiKey ?? Settings.ApiKey ?? Environment.GetEnvironmentVariable("PLANGRIDAPIKEY");
             if (apiKey == null)
