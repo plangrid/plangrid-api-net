@@ -44,7 +44,7 @@ namespace PlanGrid.Api
                     request.Content = new StringContent("", Encoding.UTF8, "application/json");
                 }
 
-                request.Headers.Authorization = new AuthenticationHeaderValue(this.tokenType, authenticationToken);
+                request.Headers.Authorization = new AuthenticationHeaderValue(this.tokenType.ToString(), authenticationToken);
                 request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse($"application/vnd.plangrid+json; version={version}"));
 
                 HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
@@ -83,15 +83,15 @@ namespace PlanGrid.Api
 
         private string BuildAuthenticationToken(string accessToken, TokenType tokenType)
         {
-            if (tokenType == TokenType.Basic)
+            switch (TokenType)
             {
-                string unencoded = $"{accessToken}:";
-                byte[] authParamBytes = Encoding.ASCII.GetBytes(unencoded);
-                string encodedAuthParams = Convert.ToBase64String(authParamBytes);
-                return encodedAuthParams;
-            } else if (tokenType == TokenType.Bearer)
-            {
-                return accessToken;
+                case TokenType.Basic:
+                    string unencoded = $"{accessToken}:";
+                    byte[] authParamBytes = Encoding.ASCII.GetBytes(unencoded);
+                    string encodedAuthParams = Convert.ToBase64String(authParamBytes);
+                    return encodedAuthParams;
+                case TokenType.Bearer:
+                    return accessToken;
             }
         }
     }
