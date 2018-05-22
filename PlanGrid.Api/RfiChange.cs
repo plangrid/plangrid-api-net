@@ -18,5 +18,11 @@ namespace PlanGrid.Api
 
         [JsonProperty("new_value")]
         public JToken NewValue { get; set; }
+        
+        [JsonProperty("updated_at")]
+        public DateTime UpdatedAt { get; set; }
+
+        [JsonProperty("updated_by")]
+        public UserReference UpdatedBy { get; set; }
     }
 }
