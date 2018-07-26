@@ -16,13 +16,15 @@ namespace PlanGrid.Api
         public RefitSettings Settings { get; private set; }
         public string Version { get; private set; }
         public int? MaxRetries { get; private set; }
+        public TokenType KeyType { get; private set; }
 
-        public void Initialize(string apiKey, RefitSettings settings, string version, int? maxRetries)
+        public void Initialize(string apiKey, RefitSettings settings, string version, int? maxRetries, TokenType keyType)
         {
             ApiKey = apiKey;
             Settings = settings;
             Version = version;
             MaxRetries = maxRetries;
+            KeyType = keyType;
 
             foreach (KeyValuePair<string, Func<HttpClient, object[], object>> methodImpl in methodImpls.ToArray())
             {

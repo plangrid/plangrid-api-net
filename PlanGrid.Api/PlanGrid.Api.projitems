@@ -76,5 +76,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)UploadVersionRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Status.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VirtualFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TokenType.cs" />
   </ItemGroup>
 </Project>
