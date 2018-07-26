@@ -18,16 +18,16 @@ However, you will need to provide your API key to gain access.  There are
 three ways to provide the key.  The simplest is to pass it directly as an
 argument to `Create`:
 
-    IPlanGridApi api = PlanGridClient.Create("yourapikey");
+    IPlanGridApi api = PlanGridClient.Create("yourApiKey");
     
 This has the advantage of being straightforward, but has the disadvantage of
 baking the key into your code, which reduces security and makes it more 
 difficult to update.
 	
-Alternatively, you can set the key in you `App.config` (or `Web.config`) file: 
+Alternatively, you can set the key in your `App.config` (or `Web.config`) file: 
 
     <appSettings>
-        <add key="PlanGridApiKey" value="yourapikey" />
+        <add key="PlanGridApiKey" value="yourApiKey" />
     </appSettings>
 
 Ensure that you do not already have an `<appSettings>` node -- if you do, add 
