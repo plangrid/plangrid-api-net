@@ -42,7 +42,7 @@ namespace PlanGrid.Api
                     request.Content = new StringContent("", Encoding.UTF8, "application/json");
                 }
 
-                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authenticationToken);
+                request.Headers.Authorization = "Bearer " + authenticationToken;
                 request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse($"application/vnd.plangrid+json; version={version}"));
 
                 HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
