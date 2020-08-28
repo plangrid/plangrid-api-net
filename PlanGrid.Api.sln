@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanGrid.Api.Tests", "PlanGrid.Api.Tests\PlanGrid.Api.Tests.csproj", "{A650AA19-DE09-4D8D-965A-7195D41FAE96}"
 EndProject
@@ -9,10 +9,13 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PlanGrid.Api", "PlanGrid.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanGrid.Api.Net45", "PlanGrid.Api.Net45\PlanGrid.Api.Net45.csproj", "{92301982-65EB-42E2-85F4-6691552292F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanGrid.Api.NetStandard20", "PlanGrid.Api.NetStandard20\PlanGrid.Api.NetStandard20.csproj", "{E9757663-65CA-45F1-A897-6FB854BA7E91}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		PlanGrid.Api\PlanGrid.Api.projitems*{92301982-65eb-42e2-85f4-6691552292f0}*SharedItemsImports = 4
 		PlanGrid.Api\PlanGrid.Api.projitems*{42b50126-061c-41dc-8544-b1698a30891e}*SharedItemsImports = 13
+		PlanGrid.Api\PlanGrid.Api.projitems*{92301982-65eb-42e2-85f4-6691552292f0}*SharedItemsImports = 4
+		PlanGrid.Api\PlanGrid.Api.projitems*{e9757663-65ca-45f1-a897-6fb854ba7e91}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +30,15 @@ Global
 		{92301982-65EB-42E2-85F4-6691552292F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92301982-65EB-42E2-85F4-6691552292F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92301982-65EB-42E2-85F4-6691552292F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9757663-65CA-45F1-A897-6FB854BA7E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9757663-65CA-45F1-A897-6FB854BA7E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9757663-65CA-45F1-A897-6FB854BA7E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9757663-65CA-45F1-A897-6FB854BA7E91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D366217B-0B66-429E-8FA6-41468270D16B}
 	EndGlobalSection
 EndGlobal

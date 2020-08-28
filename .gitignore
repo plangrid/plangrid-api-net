@@ -5,3 +5,6 @@ PlanGrid.Api.Tests/bin/
 PlanGrid.Api.Net45/obj/
 *.user
 PlanGrid.Api.Net45/bin/
+
+/PlanGrid.Api.NetStandard20/bin/
+/PlanGrid.Api.NetStandard20/obj/
